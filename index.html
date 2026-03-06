@@ -52,6 +52,20 @@ nav{
   transition:color 0.3s;
 }
 .nav-links a:hover{color:var(--gold2);}
+.nav-links .nav-shop-link{
+  color:var(--gold) !important;
+  border:1px solid var(--border);
+  padding:5px 14px;
+  border-radius:20px;
+  letter-spacing:0.08em;
+  transition:all 0.2s !important;
+}
+.nav-links .nav-shop-link:hover{
+  background:var(--gold);
+  color:var(--ink) !important;
+  border-color:var(--gold);
+}
+
 .nav-cta{
   background:linear-gradient(135deg,#9a7520,var(--gold2));
   color:var(--ink);border:none;border-radius:20px;
@@ -697,6 +711,7 @@ body::before{
     <li><a href="#system">系列</a></li>
     <li><a href="#products">產品</a></li>
     <li><a href="#quiz">保養配對</a></li>
+    <li><a href="shop.html" class="nav-shop-link">立即選購</a></li>
   </ul>
   <button class="nav-cta" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">循環露配對</button>
   <div class="hamburger" onclick="toggleMenu()" id="hamburger">

@@ -137,6 +137,29 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;d
 .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:var(--gold2);font-size:13px;padding:12px 24px;border-radius:40px;letter-spacing:0.1em;opacity:0;transition:all 0.3s;z-index:999;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
+
+/* POLICY */
+.policy-box{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-bottom:16px;}
+.policy-title{font-size:12px;letter-spacing:0.2em;color:var(--gold);margin-bottom:10px;}
+.policy-content{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:14px;}
+.policy-content strong{color:var(--ink);}
+.policy-check{display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12px;color:var(--ink);line-height:1.6;}
+.policy-check input{margin-top:2px;accent-color:var(--gold);width:14px;height:14px;flex-shrink:0;}
+
+
+/* SHIPPING */
+.shipping-box{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-bottom:16px;}
+.shipping-title{font-size:12px;letter-spacing:0.2em;color:var(--gold);margin-bottom:14px;}
+.shipping-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.shipping-opt{border:1px solid var(--border);border-radius:10px;padding:14px;cursor:pointer;transition:all 0.2s;}
+.shipping-opt:hover{border-color:var(--gold);}
+.shipping-opt.selected{border-color:var(--gold);background:linear-gradient(135deg,rgba(201,168,76,0.06),transparent);}
+.shipping-opt-name{font-family:'Noto Serif TC',serif;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.shipping-opt-desc{font-size:11px;color:var(--muted);}
+.shipping-opt-price{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);margin-top:6px;}
+.shipping-free-note{font-size:11px;color:#5a9a6a;letter-spacing:0.05em;margin-top:8px;}
+@media(max-width:480px){.shipping-options{grid-template-columns:1fr;}}
+
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;}
 .footer-copy{font-size:11px;color:rgba(154,136,112,0.5);}
@@ -262,6 +285,36 @@ footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;}
     </div>
   </div>
 
+<!-- 配送方式 -->
+<div class="shipping-box" id="shippingSection">
+  <div class="shipping-title">&#10022; 配送方式</div>
+  <div class="shipping-options">
+    <div class="shipping-opt" id="shipConv" onclick="selectShipping('convenience')">
+      <div class="shipping-opt-name">超商取貨</div>
+      <div class="shipping-opt-desc">7-11 / 全家便利超商</div>
+      <div class="shipping-opt-price" id="convPrice">NT$ 60</div>
+    </div>
+    <div class="shipping-opt" id="shipHome" onclick="selectShipping('home')">
+      <div class="shipping-opt-name">宅配到府</div>
+      <div class="shipping-opt-desc">黑貓 / 新竹物流</div>
+      <div class="shipping-opt-price" id="homePrice">NT$ 100</div>
+    </div>
+  </div>
+  <div class="shipping-free-note" id="shippingFreeNote" style="display:none;">&#10003; 訂單金額滿 NT$ 2,500，免運費！</div>
+</div>
+
+<!-- 退換貨政策 -->
+<div class="policy-box">
+  <div class="policy-title">✦ 退換貨政策</div>
+  <div class="policy-content">
+    本商品為保養品，基於衛生安全考量，<strong>拆封後恕不退換貨</strong>。請於收到商品後確認外包裝完整再拆封。客製化組合依消費者保護法第19條，不適用7天鑑賞期。退貨運費由消費者負擔。
+  </div>
+  <label class="policy-check">
+    <input type="checkbox" id="agreePolicy" onchange="checkPolicy()">
+    <span>我已閱讀並同意上述退換貨政策</span>
+  </label>
+</div>
+
   <!-- 警告 / 完成提示 -->
   <div class="warn-box" id="warnBox"></div>
   <div class="ok-box" id="okBox"></div>
@@ -275,7 +328,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;}
 </div>
 
 <footer>
-  <div class="footer-copy">© 2026 PRO◆Pharm · 循環露 CIRCULATION ESSENCE · 台灣製造</div>
+  <div class="footer-copy">© 2026 PRO◆Pharm · CIRCULATION ESSENCE · All Rights Reserved</div>
 </footer>
 
 <div class="toast" id="toast"></div>
@@ -455,6 +508,8 @@ function update(){
     okBox.style.display='block';
     btn.disabled=false;
   }
+  // also check policy
+  if(document.getElementById('agreePolicy') && !document.getElementById('agreePolicy').checked) btn.disabled=true;
 }
 
 // ── 送出訂單 ──
@@ -484,6 +539,48 @@ function submitOrder(){
   setTimeout(()=>{
     alert(`感謝您的訂購！\n\n組合：${combo}\n合計：NT$ ${totalPrice.toLocaleString()} 元\n\n我們將透過 Line 或 Email 發送付款連結給您，請耐心等候。`);
   }, 500);
+}
+
+
+
+// ── 配送 ──
+let shippingMethod = null;
+const FREE_THRESHOLD = 2500;
+const SHIP_FEES = {convenience:60, home:100};
+
+function selectShipping(method){
+  shippingMethod = method;
+  document.getElementById('shipConv').classList.toggle('selected', method==='convenience');
+  document.getElementById('shipHome').classList.toggle('selected', method==='home');
+  updateShippingDisplay();
+  checkPolicy();
+}
+
+function updateShippingDisplay(){
+  let subtotal = 0;
+  PRODUCTS.forEach(p=>{ subtotal += (selected[p.id]||0)*p.cyclePrice; });
+  const isFree = subtotal >= FREE_THRESHOLD;
+  const fee = (!shippingMethod||isFree)?0:SHIP_FEES[shippingMethod];
+  if(isFree){
+    document.getElementById('convPrice').textContent='免運';
+    document.getElementById('homePrice').textContent='免運';
+    document.getElementById('shippingFreeNote').style.display='block';
+  } else {
+    document.getElementById('convPrice').textContent='NT$ 60';
+    document.getElementById('homePrice').textContent='NT$ 100';
+    document.getElementById('shippingFreeNote').style.display='none';
+  }
+  const totalEl = document.getElementById('totalPrice');
+  if(totalEl) totalEl.textContent=(subtotal+fee).toLocaleString();
+}
+
+function checkPolicy(){
+  const agreed = document.getElementById('agreePolicy').checked;
+  const btn = document.getElementById('btnSubmit');
+  // check 32 supports
+  let total = 0;
+  PRODUCTS.forEach(p=>{ total += (selected[p.id]||0)*4; });
+  btn.disabled = !(agreed && total === 32 && shippingMethod);
 }
 
 function showToast(msg){
