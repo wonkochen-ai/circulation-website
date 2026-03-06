@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>循環露 · 客製化 32 支循環組合</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700;900&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1510;
+  --ink2:#3d2e1c;
+  --gold:#c9a84c;
+  --gold2:#e8c96a;
+  --gold3:#f5e4b0;
+  --gold4:#fdf8ec;
+  --cream:#f9f6f0;
+  --white:#fffefb;
+  --pearl:#f5f0e8;
+  --pearl2:#ede5d8;
+  --muted:#9a8870;
+  --border:rgba(201,168,76,0.2);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--pearl);color:var(--ink);overflow-x:hidden;-webkit-user-select:none;user-select:none;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.07) 0%,transparent 60%);pointer-events:none;z-index:0;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(245,240,232,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-back{font-size:12px;letter-spacing:0.15em;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s;}
+.nav-back:hover{color:var(--gold);}
+.nav-back svg{width:14px;height:14px;}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:0.2em;color:var(--muted);}
+
+/* HERO */
+.hero{padding:100px 40px 40px;text-align:center;}
+.hero-tag{font-size:10px;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+.hero-title{font-family:'Noto Serif TC',serif;font-size:clamp(24px,3.5vw,36px);font-weight:700;color:var(--ink);margin-bottom:10px;}
+.hero-sub{font-size:13px;color:var(--muted);letter-spacing:0.08em;line-height:1.8;}
+
+/* STICKY COUNTER */
+.sticky-bar{position:sticky;top:64px;z-index:90;background:rgba(245,240,232,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.counter-left{display:flex;align-items:center;gap:16px;}
+.counter-label{font-size:11px;letter-spacing:0.15em;color:var(--muted);}
+.counter-track{width:200px;height:6px;background:var(--pearl2);border-radius:10px;overflow:hidden;}
+.counter-fill{height:100%;background:linear-gradient(90deg,#9a7520,var(--gold2));border-radius:10px;transition:width 0.4s cubic-bezier(0.4,0,0.2,1);}
+.counter-nums{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);}
+.counter-nums span{color:var(--gold);}
+.counter-price{text-align:right;}
+.counter-price-label{font-size:10px;letter-spacing:0.15em;color:var(--muted);margin-bottom:2px;}
+.counter-price-amt{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);}
+.counter-warn{font-size:11px;color:#c0392b;letter-spacing:0.1em;display:none;}
+.counter-complete{font-size:11px;color:#5a9a6a;letter-spacing:0.1em;display:none;}
+@media(max-width:640px){.sticky-bar{padding:10px 16px;flex-wrap:wrap;}.counter-track{width:120px;}}
+
+/* MAIN */
+.main{max-width:860px;margin:0 auto;padding:32px 24px 40px;}
+
+/* GRADE SECTION */
+.grade-section{margin-bottom:40px;}
+.grade-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.grade-line{height:1px;flex:1;background:linear-gradient(90deg,var(--gold3),transparent);}
+.grade-line-r{height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold3));}
+.grade-badge{font-size:10px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;white-space:nowrap;padding:4px 12px;border:1px solid var(--border);border-radius:20px;}
+
+/* PRODUCT ROW */
+.prod-row{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-bottom:12px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;transition:all 0.25s;position:relative;overflow:hidden;}
+.prod-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:transparent;transition:background 0.3s;}
+.prod-row.active::before{background:linear-gradient(180deg,#9a7520,var(--gold2));}
+.prod-row.active{border-color:rgba(201,168,76,0.5);background:linear-gradient(135deg,rgba(201,168,76,0.04),var(--white));}
+.prod-info{display:flex;align-items:center;gap:16px;}
+.prod-series-badge{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold);min-width:40px;}
+.prod-details{}
+.prod-name{font-family:'Noto Serif TC',serif;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.prod-en{font-family:'Cormorant Garamond',serif;font-size:11px;color:var(--muted);letter-spacing:0.08em;margin-bottom:4px;}
+.prod-unit-price{font-size:11px;color:var(--muted);}
+.prod-unit-price strong{color:var(--gold);font-family:'Playfair Display',serif;}
+
+/* CYCLE SELECTOR */
+.cycle-selector{display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.cycle-opt{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;font-family:'Playfair Display',serif;font-size:14px;color:var(--muted);transition:all 0.2s;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0;}
+.cycle-opt:hover{border-color:var(--gold);color:var(--gold);}
+.cycle-opt.selected{background:linear-gradient(135deg,#9a7520,var(--gold2));border-color:transparent;color:var(--ink);font-weight:700;box-shadow:0 4px 12px rgba(201,168,76,0.3);}
+.cycle-opt-label{font-size:8px;letter-spacing:0.05em;color:inherit;font-family:'Noto Sans TC',sans-serif;}
+.cycle-subtotal{font-family:'Playfair Display',serif;font-size:15px;color:var(--ink);min-width:90px;text-align:right;}
+.cycle-subtotal small{font-family:'Noto Sans TC',sans-serif;font-size:10px;color:var(--muted);display:block;}
+
+@media(max-width:640px){
+  .prod-row{grid-template-columns:1fr;padding:16px;}
+  .cycle-selector{justify-content:flex-start;flex-wrap:wrap;}
+  .cycle-subtotal{text-align:left;}
+  .cycle-opt{width:32px;height:32px;font-size:12px;}
+}
+
+/* SUMMARY BOX */
+.summary-box{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:20px;}
+.summary-header{padding:18px 24px;border-bottom:1px solid var(--border);font-family:'Noto Serif TC',serif;font-size:15px;font-weight:700;color:var(--ink);}
+.summary-empty{padding:32px 24px;text-align:center;color:var(--muted);font-size:13px;}
+.summary-items{padding:12px 24px;}
+.summary-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(201,168,76,0.08);font-size:13px;}
+.summary-item:last-child{border-bottom:none;}
+.summary-item-name{color:var(--ink);}
+.summary-item-name span{font-family:'Playfair Display',serif;color:var(--gold);margin-right:6px;}
+.summary-item-price{font-family:'Playfair Display',serif;color:var(--ink);}
+.summary-total{padding:16px 24px;border-top:1px solid var(--border);background:linear-gradient(135deg,rgba(201,168,76,0.04),transparent);display:flex;justify-content:space-between;align-items:baseline;}
+.summary-total-label{font-family:'Noto Serif TC',serif;font-size:14px;font-weight:700;}
+.summary-total-amt{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;}
+.summary-total-unit{font-size:12px;color:var(--muted);margin-left:4px;}
+
+/* CONTACT */
+.contact-box{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px;}
+.contact-title{font-family:'Noto Serif TC',serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:16px;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.contact-field{display:flex;flex-direction:column;gap:6px;}
+.contact-field.full{grid-column:1/-1;}
+.contact-label{font-size:11px;letter-spacing:0.1em;color:var(--muted);}
+.contact-label em{color:var(--gold);}
+.contact-input{border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-family:'Noto Sans TC',sans-serif;font-size:13px;background:var(--pearl);color:var(--ink);outline:none;transition:border-color 0.2s;}
+.contact-input:focus{border-color:var(--gold);}
+.contact-input::placeholder{color:var(--muted);}
+@media(max-width:480px){.contact-grid{grid-template-columns:1fr;}}
+
+/* WARNING BOX */
+.warn-box{background:rgba(192,57,43,0.06);border:1px solid rgba(192,57,43,0.2);border-radius:12px;padding:14px 18px;margin-bottom:16px;font-size:12px;color:#c0392b;letter-spacing:0.05em;display:none;line-height:1.7;}
+.ok-box{background:rgba(90,154,106,0.06);border:1px solid rgba(90,154,106,0.25);border-radius:12px;padding:14px 18px;margin-bottom:16px;font-size:12px;color:#3a7a4a;letter-spacing:0.05em;display:none;line-height:1.7;}
+
+/* CHECKOUT BTN */
+.btn-checkout{width:100%;padding:18px;background:linear-gradient(135deg,#9a7520,var(--gold2));border:none;border-radius:12px;font-family:'Noto Serif TC',serif;font-size:16px;font-weight:700;color:var(--ink);cursor:pointer;letter-spacing:0.15em;transition:all 0.3s;position:relative;overflow:hidden;margin-bottom:12px;}
+.btn-checkout::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(255,255,255,0.2) 0%,transparent 70%);}
+.btn-checkout:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,168,76,0.4);}
+.btn-checkout:disabled{opacity:0.35;cursor:not-allowed;}
+.btn-checkout span{position:relative;z-index:1;}
+.btn-back{width:100%;padding:14px;background:transparent;border:1px solid var(--border);border-radius:12px;font-family:'Noto Sans TC',sans-serif;font-size:13px;color:var(--muted);cursor:pointer;letter-spacing:0.1em;transition:all 0.2s;text-decoration:none;display:block;text-align:center;}
+.btn-back:hover{border-color:var(--gold);color:var(--gold);}
+
+/* TOAST */
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:var(--gold2);font-size:13px;padding:12px 24px;border-radius:40px;letter-spacing:0.1em;opacity:0;transition:all 0.3s;z-index:999;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px 40px;text-align:center;}
+.footer-copy{font-size:11px;color:rgba(154,136,112,0.5);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="shop.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    返回選購頁
+  </a>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.56 85.04" style="height:44px;width:auto;vertical-align:middle;display:inline-block"><defs><style>.sl{fill:#C9A84C;fill-rule:evenodd}.sl2{fill:#C9A84C}</style></defs><g><path class="sl2" d="M4.36,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM7.93,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/><path class="sl2" d="M16.62,34.74h4.15c1.68,0,3,.43,3.98,1.28.97.85,1.46,2.01,1.46,3.48,0,.75-.18,1.48-.55,2.18-.37.7-.91,1.23-1.61,1.59l2.85,7.01h-3.76l-2.88-7.08h-.06v7.08h-3.56v-15.55ZM20.19,37.75v3.69c1.58-.03,2.36-.58,2.36-1.64,0-.72-.18-1.24-.55-1.55-.36-.31-.97-.48-1.82-.5Z"/><path class="sl2" d="M34.02,50.67c-1.9,0-3.34-.72-4.34-2.16-1-1.44-1.49-3.52-1.49-6.24,0-2.51.5-4.46,1.5-5.86,1-1.4,2.39-2.1,4.18-2.1,1.91,0,3.36.7,4.37,2.11,1.01,1.41,1.51,3.41,1.51,6.02s-.5,4.63-1.49,6.07c-.99,1.44-2.41,2.16-4.24,2.16ZM33.89,37.84c-1.29,0-1.93,1.49-1.93,4.48,0,1.93.16,3.21.49,3.85.33.64.8.97,1.42.97.67,0,1.18-.32,1.53-.97.36-.64.54-1.91.54-3.78,0-3.04-.68-4.55-2.05-4.55Z"/><path class="sl2" d="M66.02,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM69.58,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/><path class="sl2" d="M77.9,33.88h3.41v7.08h.06c.84-1.16,1.81-1.74,2.91-1.74.78,0,1.39.25,1.83.76s.65,1.22.65,2.15v8.15h-3.42v-6.53c0-.42-.08-.75-.25-.98-.17-.24-.4-.36-.7-.36-.71,0-1.07.48-1.07,1.43v6.44h-3.41v-16.41Z"/><path class="sl2" d="M94.66,50.29v-1.41h-.05c-.42.61-.82,1.05-1.21,1.34-.39.29-.85.43-1.37.43-1.03,0-1.85-.52-2.46-1.56-.61-1.04-.92-2.45-.92-4.24s.31-3.08.93-4.1c.62-1.02,1.44-1.53,2.45-1.53.54,0,1,.13,1.38.4.38.27.77.7,1.18,1.29h.05v-1.34h3.42v10.71h-3.4ZM94.66,44.88c0-1.78-.44-2.67-1.32-2.67s-1.33.89-1.33,2.67.46,2.77,1.38,2.77c.85,0,1.27-.92,1.27-2.77Z"/><path class="sl2" d="M103.94,39.58v1.79h.05c.82-1.4,1.67-2.1,2.58-2.1.13,0,.32.02.55.07v3.32c-.42-.07-.8-.1-1.15-.1-1.25,0-1.88.8-1.88,2.41v5.32h-3.41v-10.71h3.27Z"/><path class="sl2" d="M112.37,39.58v1.32c.97-1.13,1.96-1.69,2.96-1.69,1.21,0,1.99.62,2.34,1.85.55-.64,1.06-1.11,1.53-1.41.47-.3,1.03-.44,1.66-.44,1.59,0,2.39,1.1,2.39,3.31v7.78h-3.42v-6.32c0-1.03-.34-1.55-1.01-1.55s-1.04.51-1.04,1.53v6.35h-3.42v-6.51c0-.4-.09-.72-.28-.98-.18-.26-.42-.38-.71-.38-.31,0-.55.12-.74.37-.18.25-.28.59-.28,1.01v6.49h-3.41v-10.71h3.41Z"/></g><g><path class="sl" d="M50.49,35c.77-1.1,1.43-2.29,1.99-3.56.6,1.29,1.28,2.47,2.04,3.56h-4.03ZM55.11,39.53h3.72c-1.39-1.06-2.63-2.3-3.72-3.72v3.72ZM59.85,44.03c1.05-.71,2.2-1.34,3.43-1.91-1.22-.53-2.36-1.15-3.43-1.86v3.77ZM49.86,39.53v-3.68c-1.07,1.37-2.32,2.6-3.76,3.68h3.76ZM45.12,40.23c-1.05.71-2.2,1.34-3.43,1.9,1.22.53,2.37,1.15,3.43,1.86v-3.77ZM55.11,44.73v3.68c1.07-1.37,2.33-2.6,3.77-3.68h-3.77ZM49.86,44.73h-3.72c1.39,1.06,2.62,2.3,3.72,3.72v-3.72ZM50.45,49.26c.76,1.09,1.43,2.27,2.03,3.56.56-1.27,1.22-2.46,2-3.56h-4.03Z"/><rect class="sl2" x="50.56" y="40.22" width="3.85" height="3.81"/></g></svg>
+  <span class="nav-logo-text">客製化組合</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">✦ 專屬配比 · 32 支循環組合</div>
+  <h1 class="hero-title">打造您的專屬保養循環</h1>
+  <p class="hero-sub">從 G1–G8 自由選擇每個系列的循環數<br>湊滿 32 支，完成一個完整的保養循環計畫</p>
+</div>
+
+<!-- STICKY COUNTER -->
+<div class="sticky-bar">
+  <div class="counter-left">
+    <div>
+      <div class="counter-label">已選支數</div>
+      <div class="counter-nums"><span id="countNum">0</span> / 32 支</div>
+    </div>
+    <div>
+      <div class="counter-track">
+        <div class="counter-fill" id="counterFill" style="width:0%"></div>
+      </div>
+      <div class="counter-warn" id="counterWarn">⚠ 超過 32 支</div>
+      <div class="counter-complete" id="counterComplete">✓ 剛好 32 支！</div>
+    </div>
+  </div>
+  <div class="counter-price">
+    <div class="counter-price-label">目前合計</div>
+    <div class="counter-price-amt">NT$ <span id="totalPrice">0</span></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- 旗艦級 -->
+  <div class="grade-section">
+    <div class="grade-header">
+      <div class="grade-line"></div>
+      <div class="grade-badge">✦ 旗艦級</div>
+      <div class="grade-line-r"></div>
+    </div>
+    <div id="rows-flagship"></div>
+  </div>
+
+  <!-- 主力級 -->
+  <div class="grade-section">
+    <div class="grade-header">
+      <div class="grade-line"></div>
+      <div class="grade-badge">◈ 主力級</div>
+      <div class="grade-line-r"></div>
+    </div>
+    <div id="rows-main"></div>
+  </div>
+
+  <!-- 入門級 -->
+  <div class="grade-section">
+    <div class="grade-header">
+      <div class="grade-line"></div>
+      <div class="grade-badge">○ 入門級</div>
+      <div class="grade-line-r"></div>
+    </div>
+    <div id="rows-entry"></div>
+  </div>
+
+  <!-- 組合總覽 -->
+  <div class="sec-header" style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+    <div style="height:1px;flex:1;background:linear-gradient(90deg,var(--gold3),transparent);"></div>
+    <div style="font-size:10px;letter-spacing:0.3em;color:var(--gold);white-space:nowrap;">✦ 組合總覽</div>
+    <div style="height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold3));"></div>
+  </div>
+
+  <div class="summary-box">
+    <div class="summary-header">您的客製化組合</div>
+    <div id="summaryEmpty" class="summary-empty">尚未選擇任何系列</div>
+    <div id="summaryItems" class="summary-items" style="display:none;"></div>
+    <div class="summary-total" id="summaryTotal" style="display:none;">
+      <span class="summary-total-label">合計</span>
+      <div>
+        <span class="summary-total-amt" id="summaryAmt">0</span>
+        <span class="summary-total-unit">元</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 聯絡資訊 -->
+  <div class="contact-box">
+    <div class="contact-title">聯絡資訊</div>
+    <div class="contact-grid">
+      <div class="contact-field">
+        <label class="contact-label">姓名 <em>*</em></label>
+        <input class="contact-input" id="cName" type="text" placeholder="您的姓名">
+      </div>
+      <div class="contact-field">
+        <label class="contact-label">手機 <em>*</em></label>
+        <input class="contact-input" id="cPhone" type="tel" placeholder="0912-345-678">
+      </div>
+      <div class="contact-field full">
+        <label class="contact-label">Email <em>*</em></label>
+        <input class="contact-input" id="cEmail" type="email" placeholder="example@email.com">
+      </div>
+      <div class="contact-field full">
+        <label class="contact-label">Line ID（選填）</label>
+        <input class="contact-input" id="cLine" type="text" placeholder="您的 Line ID，方便我們發送付款連結">
+      </div>
+      <div class="contact-field full">
+        <label class="contact-label">備註（選填）</label>
+        <input class="contact-input" id="cNote" type="text" placeholder="例如：肌膚特殊狀況、指定配比說明…">
+      </div>
+    </div>
+  </div>
+
+  <!-- 警告 / 完成提示 -->
+  <div class="warn-box" id="warnBox"></div>
+  <div class="ok-box" id="okBox"></div>
+
+  <!-- 送出 -->
+  <button class="btn-checkout" id="btnSubmit" onclick="submitOrder()" disabled>
+    <span>確認送出，等候付款連結 →</span>
+  </button>
+  <a href="shop.html" class="btn-back">← 返回一般選購</a>
+
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 PRO◆Pharm · 循環露 CIRCULATION ESSENCE · 台灣製造</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// 防複製
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&['a','c','u','s'].includes(e.key.toLowerCase()))e.preventDefault();
+  if(e.key==='F12')e.preventDefault();
+});
+
+// ── 產品資料 ──
+const PRODUCTS = [
+  {id:'G1',series:'G1',grade:'flagship',name:'細胞外囊泡',en:'Extracellular Vesicle',fullPrice:2580},
+  {id:'G2',series:'G2',grade:'flagship',name:'幹細胞能量',en:'Stem Cell Energy',fullPrice:2580},
+  {id:'G3',series:'G3',grade:'main',name:'胜肽緊緻保養',en:'Peptide Firming',fullPrice:1980},
+  {id:'G4',series:'G4',grade:'main',name:'PDRN 美白',en:'PDRN Brightening',fullPrice:1980},
+  {id:'G5',series:'G5',grade:'main',name:'微生態調理',en:'Microbiome Balance',fullPrice:1680},
+  {id:'G6',series:'G6',grade:'entry',name:'黑豆舒緩保養',en:'Black Bean Soothing',fullPrice:1480},
+  {id:'G7',series:'G7',grade:'entry',name:'深層保濕',en:'Deep Hydration',fullPrice:1280},
+  {id:'G8',series:'G8',grade:'entry',name:'二裂酵母保養',en:'Bifida Ferment',fullPrice:1280},
+];
+// 每循環單價 = 32支總價 ÷ 8循環（取整數）
+PRODUCTS.forEach(p => p.cyclePrice = Math.round(p.fullPrice / 8));
+
+// 選擇狀態 {id: cycles}
+const selected = {};
+PRODUCTS.forEach(p=>selected[p.id]=0);
+
+// ── 渲染產品列 ──
+function renderRows(){
+  const groups = {flagship:'rows-flagship',main:'rows-main',entry:'rows-entry'};
+  Object.keys(groups).forEach(grade=>{
+    const container = document.getElementById(groups[grade]);
+    container.innerHTML='';
+    PRODUCTS.filter(p=>p.grade===grade).forEach(p=>{
+      const row = document.createElement('div');
+      row.className='prod-row';
+      row.id=`row-${p.id}`;
+      row.innerHTML=`
+        <div class="prod-info">
+          <div class="prod-series-badge">${p.series}</div>
+          <div class="prod-details">
+            <div class="prod-name">${p.name}</div>
+            <div class="prod-en">${p.en}</div>
+            <div class="prod-unit-price">1 循環 4 支 · <strong>NT$ ${p.cyclePrice.toLocaleString()}</strong> · 全套 32 支 NT$ ${p.fullPrice.toLocaleString()}</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:flex-end;">
+          <div class="cycle-selector">
+            ${[0,1,2,3,4,5,6,7].map(n=>`
+              <button class="cycle-opt${n===0?' selected':''}" id="opt-${p.id}-${n}" onclick="setCycle('${p.id}',${n})">
+                ${n}
+                <span class="cycle-opt-label">${n===0?'不選':n+'循環'}</span>
+              </button>
+            `).join('')}
+          </div>
+          <div class="cycle-subtotal" id="sub-${p.id}">
+            <span>—</span>
+            <small></small>
+          </div>
+        </div>
+      `;
+      container.appendChild(row);
+    });
+  });
+}
+
+// ── 設定循環數 ──
+function setCycle(id, cycles){
+  selected[id] = cycles;
+
+  // 更新按鈕
+  [0,1,2,3].forEach(n=>{
+    const btn = document.getElementById(`opt-${id}-${n}`);
+    if(btn) btn.className = `cycle-opt${n===cycles?' selected':''}`;
+  });
+
+  // 更新小計
+  const p = PRODUCTS.find(x=>x.id===id);
+  const subEl = document.getElementById(`sub-${id}`);
+  if(cycles===0){
+    subEl.innerHTML='<span>—</span><small></small>';
+  } else {
+    const sub = p.cyclePrice * cycles;
+    subEl.innerHTML=`<span>NT$ ${sub.toLocaleString()}</span><small>${cycles * 4} 支</small>`;
+  }
+
+  // 更新 row active state
+  const row = document.getElementById(`row-${id}`);
+  if(cycles>0) row.classList.add('active');
+  else row.classList.remove('active');
+
+  update();
+}
+
+// ── 計算總計 ──
+function update(){
+  let totalSupports = 0;
+  let totalPrice = 0;
+
+  PRODUCTS.forEach(p=>{
+    const c = selected[p.id];
+    totalSupports += c * 4;
+    totalPrice += c * p.cyclePrice;
+  });
+
+  // Counter
+  document.getElementById('countNum').textContent = totalSupports;
+  document.getElementById('totalPrice').textContent = totalPrice.toLocaleString();
+
+  const pct = Math.min(100, (totalSupports/32)*100);
+  document.getElementById('counterFill').style.width = pct+'%';
+
+  const warnEl = document.getElementById('counterWarn');
+  const okEl = document.getElementById('counterComplete');
+  if(totalSupports > 32){
+    warnEl.style.display='block';
+    okEl.style.display='none';
+    document.getElementById('counterFill').style.background='linear-gradient(90deg,#c0392b,#e74c3c)';
+  } else if(totalSupports === 32){
+    warnEl.style.display='none';
+    okEl.style.display='block';
+    document.getElementById('counterFill').style.background='linear-gradient(90deg,#3a7a4a,#5a9a6a)';
+  } else {
+    warnEl.style.display='none';
+    okEl.style.display='none';
+    document.getElementById('counterFill').style.background='linear-gradient(90deg,#9a7520,var(--gold2))';
+  }
+
+  // Summary
+  const hasAny = Object.values(selected).some(c=>c>0);
+  document.getElementById('summaryEmpty').style.display = hasAny?'none':'';
+  document.getElementById('summaryItems').style.display = hasAny?'':'none';
+  document.getElementById('summaryTotal').style.display = hasAny?'flex':'none';
+
+  if(hasAny){
+    const itemsEl = document.getElementById('summaryItems');
+    itemsEl.innerHTML='';
+    PRODUCTS.filter(p=>selected[p.id]>0).forEach(p=>{
+      const c = selected[p.id];
+      const el = document.createElement('div');
+      el.className='summary-item';
+      el.innerHTML=`
+        <div class="summary-item-name"><span>${p.series}</span>${p.name} × ${c} 循環（${c*4} 支）</div>
+        <div class="summary-item-price">NT$ ${(p.price*c).toLocaleString()}</div>
+      `;
+      itemsEl.appendChild(el);
+    });
+    document.getElementById('summaryAmt').textContent = totalPrice.toLocaleString();
+  }
+
+  // Warn/OK boxes
+  const warnBox = document.getElementById('warnBox');
+  const okBox = document.getElementById('okBox');
+  const btn = document.getElementById('btnSubmit');
+
+  if(totalSupports === 0){
+    warnBox.style.display='none';
+    okBox.style.display='none';
+    btn.disabled=true;
+  } else if(totalSupports < 32){
+    warnBox.innerHTML=`⚠ 目前已選 ${totalSupports} 支，還差 ${32-totalSupports} 支才能湊滿 32 支完整循環。`;
+    warnBox.style.display='block';
+    okBox.style.display='none';
+    btn.disabled=true;
+  } else if(totalSupports > 32){
+    warnBox.innerHTML=`⚠ 目前已選 ${totalSupports} 支，超過 32 支 ${totalSupports-32} 支，請調整循環數。`;
+    warnBox.style.display='block';
+    okBox.style.display='none';
+    btn.disabled=true;
+  } else {
+    warnBox.style.display='none';
+    okBox.innerHTML=`✓ 完美！已選滿 32 支完整循環，合計 NT$ ${totalPrice.toLocaleString()} 元。填寫聯絡資料後即可送出。`;
+    okBox.style.display='block';
+    btn.disabled=false;
+  }
+}
+
+// ── 送出訂單 ──
+function submitOrder(){
+  const name = document.getElementById('cName').value.trim();
+  const phone = document.getElementById('cPhone').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+
+  if(!name||!phone||!email){
+    showToast('請填寫姓名、手機和 Email');
+    return;
+  }
+
+  // 組合說明
+  const combo = PRODUCTS
+    .filter(p=>selected[p.id]>0)
+    .map(p=>`${p.series} ${p.name} ×${selected[p.id]}循環`)
+    .join('、');
+
+  let totalPrice = 0;
+  PRODUCTS.forEach(p=>{ totalPrice += selected[p.id]*p.cyclePrice; });
+
+  // 這裡之後串接 Google Sheets / Make
+  // 目前先顯示確認訊息
+  showToast('訂單已送出！我們將盡快透過 Line 發送付款連結');
+
+  setTimeout(()=>{
+    alert(`感謝您的訂購！\n\n組合：${combo}\n合計：NT$ ${totalPrice.toLocaleString()} 元\n\n我們將透過 Line 或 Email 發送付款連結給您，請耐心等候。`);
+  }, 500);
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// ── 初始化 ──
+renderRows();
+update();
+</script>
+</body>
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>循環露 · 選購方案</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700;900&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1510;
+  --ink2:#3d2e1c;
+  --gold:#c9a84c;
+  --gold2:#e8c96a;
+  --gold3:#f5e4b0;
+  --gold4:#fdf8ec;
+  --cream:#f9f6f0;
+  --white:#fffefb;
+  --pearl:#f5f0e8;
+  --pearl2:#ede5d8;
+  --muted:#9a8870;
+  --border:rgba(201,168,76,0.2);
+  --blush:#ede0d0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--pearl);color:var(--ink);overflow-x:hidden;-webkit-user-select:none;user-select:none;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.07) 0%,transparent 60%);pointer-events:none;z-index:0;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(245,240,232,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:0.2em;color:var(--muted);}
+.nav-back{font-size:12px;letter-spacing:0.15em;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s;}
+.nav-back:hover{color:var(--gold);}
+.nav-back svg{width:14px;height:14px;}
+
+/* HERO */
+.shop-hero{padding:120px 40px 60px;text-align:center;position:relative;}
+.shop-hero-tag{font-size:10px;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
+.shop-hero-title{font-family:'Noto Serif TC',serif;font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:12px;}
+.shop-hero-sub{font-size:13px;color:var(--muted);letter-spacing:0.1em;}
+
+/* RECOMMENDED BANNER */
+.rec-banner{max-width:900px;margin:0 auto 48px;padding:0 24px;}
+.rec-banner-inner{background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(232,201,106,0.06));border:1px solid var(--border);border-radius:16px;padding:24px 32px;display:flex;align-items:center;gap:20px;}
+.rec-icon{font-size:28px;flex-shrink:0;}
+.rec-label{font-size:10px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:4px;}
+.rec-name{font-family:'Noto Serif TC',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.rec-desc{font-size:12px;color:var(--muted);}
+.rec-hidden{display:none;}
+
+/* SECTION TITLE */
+.sec-wrap{max-width:900px;margin:0 auto;padding:0 24px;}
+.sec-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+.sec-line{height:1px;flex:1;background:linear-gradient(90deg,var(--gold3),transparent);}
+.sec-line-r{height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold3));}
+.sec-tag{font-size:10px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;white-space:nowrap;}
+
+/* PRODUCT GRID */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:48px;}
+.prod-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;}
+.prod-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.08) 0%,transparent 70%);opacity:0;transition:opacity 0.3s;}
+.prod-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,168,76,0.15);}
+.prod-card:hover::before{opacity:1;}
+.prod-card.selected{border-color:var(--gold);background:linear-gradient(135deg,rgba(201,168,76,0.08),var(--white));box-shadow:0 0 0 2px var(--gold),0 8px 32px rgba(201,168,76,0.2);}
+.prod-card.recommended{border-color:rgba(201,168,76,0.6);}
+.prod-rec-badge{position:absolute;top:12px;right:12px;background:linear-gradient(135deg,#9a7520,var(--gold2));color:var(--ink);font-size:9px;letter-spacing:0.15em;padding:3px 8px;border-radius:20px;font-weight:600;}
+.prod-grade{font-size:9px;letter-spacing:0.25em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+.prod-series{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--gold);margin-bottom:4px;}
+.prod-name{font-family:'Noto Serif TC',serif;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.prod-en{font-family:'Cormorant Garamond',serif;font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:12px;}
+.prod-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:16px;}
+.prod-count{font-size:10px;color:var(--gold);letter-spacing:0.1em;margin-bottom:12px;}
+.prod-price-row{display:flex;align-items:baseline;gap:8px;}
+.prod-price{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--ink);}
+.prod-price-unit{font-size:12px;color:var(--muted);}
+.prod-check{position:absolute;bottom:16px;right:16px;width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.prod-card.selected .prod-check{background:var(--gold);border-color:var(--gold);}
+.prod-check svg{width:12px;height:12px;color:var(--ink);opacity:0;transition:opacity 0.2s;}
+.prod-card.selected .prod-check svg{opacity:1;}
+
+/* QTY */
+.prod-qty{display:flex;align-items:center;gap:8px;margin-top:12px;}
+.qty-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:16px;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.qty-btn:hover{border-color:var(--gold);color:var(--gold);}
+.qty-num{font-family:'Playfair Display',serif;font-size:16px;min-width:24px;text-align:center;color:var(--ink);}
+
+/* CART */
+.cart-section{max-width:900px;margin:0 auto 32px;padding:0 24px;}
+.cart-box{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.cart-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.cart-title{font-family:'Noto Serif TC',serif;font-size:16px;font-weight:700;color:var(--ink);}
+.cart-count{font-size:12px;color:var(--muted);}
+.cart-empty{padding:40px 24px;text-align:center;color:var(--muted);font-size:13px;}
+.cart-items{padding:16px 24px;}
+.cart-item{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(201,168,76,0.1);}
+.cart-item:last-child{border-bottom:none;}
+.cart-item-left{display:flex;align-items:center;gap:12px;}
+.cart-item-series{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--gold);min-width:36px;}
+.cart-item-name{font-size:13px;font-weight:500;color:var(--ink);}
+.cart-item-qty{font-size:11px;color:var(--muted);}
+.cart-item-price{font-family:'Playfair Display',serif;font-size:16px;color:var(--ink);}
+.cart-item-remove{background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:4px;transition:color 0.2s;}
+.cart-item-remove:hover{color:#c0392b;}
+
+/* COUPON */
+.coupon-row{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;}
+.coupon-input{flex:1;border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-family:'Noto Sans TC',sans-serif;font-size:13px;background:var(--pearl);color:var(--ink);outline:none;letter-spacing:0.1em;transition:border-color 0.2s;}
+.coupon-input:focus{border-color:var(--gold);}
+.coupon-input::placeholder{color:var(--muted);}
+.coupon-btn{padding:10px 20px;background:transparent;border:1px solid var(--border);border-radius:8px;font-family:'Noto Sans TC',sans-serif;font-size:12px;color:var(--muted);cursor:pointer;letter-spacing:0.1em;transition:all 0.2s;white-space:nowrap;}
+.coupon-btn:hover{border-color:var(--gold);color:var(--gold);}
+.coupon-msg{padding:0 24px 12px;font-size:11px;}
+.coupon-msg.ok{color:#5a9a6a;}
+.coupon-msg.err{color:#c0392b;}
+
+/* TOTAL */
+.cart-total{padding:20px 24px;border-top:1px solid var(--border);background:linear-gradient(135deg,rgba(201,168,76,0.04),transparent);}
+.total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:13px;color:var(--muted);}
+.total-discount{color:#5a9a6a;}
+.total-final{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
+.total-label{font-family:'Noto Serif TC',serif;font-size:15px;font-weight:700;color:var(--ink);}
+.total-amount{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--ink);}
+.total-unit{font-size:13px;color:var(--muted);margin-left:4px;}
+
+/* CHECKOUT BTN */
+.checkout-wrap{max-width:900px;margin:0 auto 24px;padding:0 24px;}
+.btn-checkout{width:100%;padding:18px;background:linear-gradient(135deg,#9a7520,var(--gold2));border:none;border-radius:12px;font-family:'Noto Serif TC',serif;font-size:16px;font-weight:700;color:var(--ink);cursor:pointer;letter-spacing:0.15em;transition:all 0.3s;position:relative;overflow:hidden;}
+.btn-checkout::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(255,255,255,0.2) 0%,transparent 70%);}
+.btn-checkout:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,168,76,0.4);}
+.btn-checkout:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none;}
+.btn-checkout span{position:relative;z-index:1;}
+
+/* LINE BTN */
+.line-wrap{max-width:900px;margin:0 auto 60px;padding:0 24px;text-align:center;}
+.line-divider{font-size:11px;color:var(--muted);letter-spacing:0.15em;margin-bottom:16px;}
+.btn-line{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:#06C755;border:none;border-radius:12px;font-family:'Noto Sans TC',sans-serif;font-size:14px;font-weight:500;color:#fff;cursor:pointer;letter-spacing:0.1em;transition:all 0.3s;text-decoration:none;}
+.btn-line:hover{background:#05b34c;transform:translateY(-2px);box-shadow:0 6px 20px rgba(6,199,85,0.3);}
+.btn-line svg{width:20px;height:20px;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:32px 40px;text-align:center;}
+.footer-logo-text{font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:0.25em;color:var(--muted);margin-bottom:8px;}
+.footer-copy{font-size:11px;color:rgba(154,136,112,0.5);}
+
+/* TOAST */
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:var(--gold2);font-size:13px;padding:12px 24px;border-radius:40px;letter-spacing:0.1em;opacity:0;transition:all 0.3s;z-index:999;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* MOBILE */
+@media(max-width:640px){
+  nav{padding:0 20px;}
+  .shop-hero{padding:100px 20px 40px;}
+  .rec-banner{padding:0 16px;margin-bottom:32px;}
+  .rec-banner-inner{padding:18px 20px;gap:14px;}
+  .sec-wrap,.cart-section,.checkout-wrap,.line-wrap{padding:0 16px;}
+  .products-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .prod-card{padding:16px;}
+  .prod-series{font-size:22px;}
+  .prod-price{font-size:20px;}
+}
+@media(max-width:400px){
+  .products-grid{grid-template-columns:1fr;}
+}
+
+
+/* CUSTOM LINE BANNER */
+.custom-banner{display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(135deg,rgba(6,199,85,0.08),rgba(6,199,85,0.03));border:1px solid rgba(6,199,85,0.25);border-radius:16px;padding:24px 28px;}
+.custom-banner-tag{font-size:10px;letter-spacing:0.3em;color:#06C755;text-transform:uppercase;margin-bottom:6px;}
+.custom-banner-title{font-family:'Noto Serif TC',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.custom-banner-desc{font-size:12px;color:var(--muted);line-height:1.7;}
+.btn-custom-line{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;background:#06C755;border:none;border-radius:10px;font-family:'Noto Sans TC',sans-serif;font-size:13px;font-weight:500;color:#fff;cursor:pointer;letter-spacing:0.08em;transition:all 0.3s;text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.btn-custom-line:hover{background:#05b34c;transform:translateY(-2px);box-shadow:0 6px 20px rgba(6,199,85,0.3);}
+@media(max-width:640px){.custom-banner{flex-direction:column;align-items:flex-start;gap:14px;padding:18px 20px;}.btn-custom-line{width:100%;justify-content:center;}}
+
+/* COPY PROTECTION */
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&['a','c','u','s'].includes(e.key.toLowerCase()))e.preventDefault();
+  if(e.key==='F12')e.preventDefault();
+});
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    返回官網
+  </a>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.56 85.04" style="height:48px;width:auto;vertical-align:middle;display:inline-block"><defs><style>.sl{fill:#C9A84C;fill-rule:evenodd}.sl2{fill:#C9A84C}</style></defs><g><path class="sl2" d="M4.36,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM7.93,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/><path class="sl2" d="M16.62,34.74h4.15c1.68,0,3,.43,3.98,1.28.97.85,1.46,2.01,1.46,3.48,0,.75-.18,1.48-.55,2.18-.37.7-.91,1.23-1.61,1.59l2.85,7.01h-3.76l-2.88-7.08h-.06v7.08h-3.56v-15.55ZM20.19,37.75v3.69c1.58-.03,2.36-.58,2.36-1.64,0-.72-.18-1.24-.55-1.55-.36-.31-.97-.48-1.82-.5Z"/><path class="sl2" d="M34.02,50.67c-1.9,0-3.34-.72-4.34-2.16-1-1.44-1.49-3.52-1.49-6.24,0-2.51.5-4.46,1.5-5.86,1-1.4,2.39-2.1,4.18-2.1,1.91,0,3.36.7,4.37,2.11,1.01,1.41,1.51,3.41,1.51,6.02s-.5,4.63-1.49,6.07c-.99,1.44-2.41,2.16-4.24,2.16ZM33.89,37.84c-1.29,0-1.93,1.49-1.93,4.48,0,1.93.16,3.21.49,3.85.33.64.8.97,1.42.97.67,0,1.18-.32,1.53-.97.36-.64.54-1.91.54-3.78,0-3.04-.68-4.55-2.05-4.55Z"/><path class="sl2" d="M66.02,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM69.58,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/><path class="sl2" d="M77.9,33.88h3.41v7.08h.06c.84-1.16,1.81-1.74,2.91-1.74.78,0,1.39.25,1.83.76s.65,1.22.65,2.15v8.15h-3.42v-6.53c0-.42-.08-.75-.25-.98-.17-.24-.4-.36-.7-.36-.71,0-1.07.48-1.07,1.43v6.44h-3.41v-16.41Z"/><path class="sl2" d="M94.66,50.29v-1.41h-.05c-.42.61-.82,1.05-1.21,1.34-.39.29-.85.43-1.37.43-1.03,0-1.85-.52-2.46-1.56-.61-1.04-.92-2.45-.92-4.24s.31-3.08.93-4.1c.62-1.02,1.44-1.53,2.45-1.53.54,0,1,.13,1.38.4.38.27.77.7,1.18,1.29h.05v-1.34h3.42v10.71h-3.4ZM94.66,44.88c0-1.78-.44-2.67-1.32-2.67s-1.33.89-1.33,2.67.46,2.77,1.38,2.77c.85,0,1.27-.92,1.27-2.77Z"/><path class="sl2" d="M103.94,39.58v1.79h.05c.82-1.4,1.67-2.1,2.58-2.1.13,0,.32.02.55.07v3.32c-.42-.07-.8-.1-1.15-.1-1.25,0-1.88.8-1.88,2.41v5.32h-3.41v-10.71h3.27Z"/><path class="sl2" d="M112.37,39.58v1.32c.97-1.13,1.96-1.69,2.96-1.69,1.21,0,1.99.62,2.34,1.85.55-.64,1.06-1.11,1.53-1.41.47-.3,1.03-.44,1.66-.44,1.59,0,2.39,1.1,2.39,3.31v7.78h-3.42v-6.32c0-1.03-.34-1.55-1.01-1.55s-1.04.51-1.04,1.53v6.35h-3.42v-6.51c0-.4-.09-.72-.28-.98-.18-.26-.42-.38-.71-.38-.31,0-.55.12-.74.37-.18.25-.28.59-.28,1.01v6.49h-3.41v-10.71h3.41Z"/></g><g><path class="sl" d="M50.49,35c.77-1.1,1.43-2.29,1.99-3.56.6,1.29,1.28,2.47,2.04,3.56h-4.03ZM55.11,39.53h3.72c-1.39-1.06-2.63-2.3-3.72-3.72v3.72ZM59.85,44.03c1.05-.71,2.2-1.34,3.43-1.91-1.22-.53-2.36-1.15-3.43-1.86v3.77ZM49.86,39.53v-3.68c-1.07,1.37-2.32,2.6-3.76,3.68h3.76ZM45.12,40.23c-1.05.71-2.2,1.34-3.43,1.9,1.22.53,2.37,1.15,3.43,1.86v-3.77ZM55.11,44.73v3.68c1.07-1.37,2.33-2.6,3.77-3.68h-3.77ZM49.86,44.73h-3.72c1.39,1.06,2.62,2.3,3.72,3.72v-3.72ZM50.45,49.26c.76,1.09,1.43,2.27,2.03,3.56.56-1.27,1.22-2.46,2-3.56h-4.03Z"/><rect class="sl2" x="50.56" y="40.22" width="3.85" height="3.81"/></g></svg>
+  <span class="nav-logo-text">選購方案</span>
+</nav>
+
+<!-- HERO -->
+<div class="shop-hero">
+  <div class="shop-hero-tag">✦ 循環露 · 方案選購</div>
+  <h1 class="shop-hero-title">選擇您的保養循環計畫</h1>
+  <p class="shop-hero-sub">每系列 4 支 · 32 天完整循環 · 台灣製造</p>
+</div>
+
+<!-- RECOMMENDED BANNER -->
+<div class="rec-banner" id="recBanner">
+  <div class="rec-banner-inner">
+    <div class="rec-icon">✦</div>
+    <div>
+      <div class="rec-label">問卷推薦方案</div>
+      <div class="rec-name" id="recName">—</div>
+      <div class="rec-desc" id="recDesc">根據您的膚質分析，以下方案已為您優先標示</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="sec-wrap">
+  <div class="sec-header">
+    <div class="sec-line"></div>
+    <div class="sec-tag">✦ 全系列方案</div>
+    <div class="sec-line-r"></div>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</div>
+
+<!-- CUSTOM LINE BANNER -->
+<div class="sec-wrap" style="margin-bottom:20px;">
+  <div class="custom-banner">
+    <div class="custom-banner-left">
+      <div class="custom-banner-tag">✦ 客製化 32 支循環組合</div>
+      <div class="custom-banner-title">想要專屬配比？</div>
+      <div class="custom-banner-desc">加入 Line 官方帳號，輸入【選購方案】<br>我們為您量身規劃 32 支客製化組合</div>
+    </div>
+    <a href="https://line.me/R/ti/p/@your-line-id" target="_blank" class="btn-custom-line">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.41-.88.03-.24.27-.49.71-.74C8.28 11.85 11.55 10.38 14 9.38c2.36-.97 2.85-.8 3.08-.8.07 0 .22.02.32.12.08.08.1.19.09.27l-.85 5.83z"/></svg>
+      加入 Line 開始客製化
+    </a>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="cart-section">
+  <div class="sec-header">
+    <div class="sec-line"></div>
+    <div class="sec-tag">✦ 購物清單</div>
+    <div class="sec-line-r"></div>
+  </div>
+  <div class="cart-box">
+    <div class="cart-header">
+      <div class="cart-title">已選方案</div>
+      <div class="cart-count" id="cartCount">尚未選擇</div>
+    </div>
+    <div id="cartBody">
+      <div class="cart-empty" id="cartEmpty">點選上方方案加入清單</div>
+      <div class="cart-items" id="cartItems" style="display:none;"></div>
+    </div>
+    <div class="coupon-row">
+      <input class="coupon-input" id="couponInput" type="text" placeholder="輸入優惠碼" maxlength="20">
+      <button class="coupon-btn" onclick="applyCoupon()">套用</button>
+    </div>
+    <div class="coupon-msg" id="couponMsg"></div>
+    <div class="cart-total" id="cartTotal" style="display:none;">
+      <div class="total-row" id="totalSubRow" style="display:none;">
+        <span>小計</span><span id="totalSub">—</span>
+      </div>
+      <div class="total-row total-discount" id="totalDiscRow" style="display:none;">
+        <span id="discLabel">優惠折扣</span><span id="totalDisc">—</span>
+      </div>
+      <div class="total-final">
+        <span class="total-label">合計</span>
+        <div><span class="total-amount" id="totalAmt">0</span><span class="total-unit">元</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT -->
+<div class="checkout-wrap">
+  <button class="btn-checkout" id="checkoutBtn" onclick="checkout()" disabled>
+    <span>前往結帳 →</span>
+  </button>
+</div>
+
+<!-- LINE -->
+<div class="line-wrap">
+  <div class="line-divider">有任何疑問？</div>
+  <a href="https://line.me/R/ti/p/@your-line-id" target="_blank" class="btn-line">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.41-.88.03-.24.27-.49.71-.74C8.28 11.85 11.55 10.38 14 9.38c2.36-.97 2.85-.8 3.08-.8.07 0 .22.02.32.12.08.08.1.19.09.27l-.85 5.83z"/></svg>
+    Line 諮詢客服
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-text">PRO◆Pharm · CIRCULATION ESSENCE</div>
+  <div class="footer-copy">© 2026 · 循環露 · 台灣製造</div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── 防複製 ──
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&['a','c','u','s'].includes(e.key.toLowerCase()))e.preventDefault();
+  if(e.key==='F12')e.preventDefault();
+});
+
+// ── 產品資料 ──
+const PRODUCTS = [
+  {id:'G1',series:'G1',grade:'旗艦級',name:'細胞外囊泡',en:'Extracellular Vesicle',desc:'珍稀植物萃取，使用後肌膚感覺賦活柔嫩，賦予肌膚光澤感。',price:2580,planKey:'A'},
+  {id:'G2',series:'G2',grade:'旗艦級',name:'幹細胞能量',en:'Stem Cell Energy',desc:'珍稀植物幹細胞萃取精華，使用後肌膚感覺滋潤有彈性，賦予肌膚活力光澤感。',price:2580,planKey:'A'},
+  {id:'G3',series:'G3',grade:'主力級',name:'胜肽緊緻保養',en:'Peptide Firming',desc:'多元胜肽複合配方，使用後肌膚感覺緊緻柔嫩，賦予肌膚彈潤感。',price:1980,planKey:null},
+  {id:'G4',series:'G4',grade:'主力級',name:'PDRN 美白',en:'PDRN Brightening',desc:'多元美白保養成分，使用後肌膚感覺透亮亮白有光澤。',price:1980,planKey:'D'},
+  {id:'G5',series:'G5',grade:'主力級',name:'微生態調理',en:'Microbiome Balance',desc:'發酵萃取配方，使用後肌膚感覺舒適柔嫩，賦予肌膚水潤均衡感。',price:1680,planKey:'C'},
+  {id:'G6',series:'G6',grade:'入門級',name:'黑豆舒緩保養',en:'Black Bean Soothing',desc:'日本黑豆發酵萃取，使用後肌膚感覺舒適柔嫩。',price:1480,planKey:'B'},
+  {id:'G7',series:'G7',grade:'入門級',name:'深層保濕',en:'Deep Hydration',desc:'四重分子量玻尿酸複合配方，使用後肌膚感覺水潤飽滿。',price:1280,planKey:'E'},
+  {id:'G8',series:'G8',grade:'入門級',name:'二裂酵母保養',en:'Bifida Ferment',desc:'二裂酵母後生元配方，使用後肌膚感覺柔嫩透亮有光澤。',price:1280,planKey:null},
+  {id:'FULL',series:'全套',grade:'完整循環',name:'G1–G8 全系列',en:'Complete Circulation Set',desc:'八大系列完整入手，32 天走完完整保養循環，全面呵護肌膚。',price:1980,originalPrice:1980,isFirstPurchase:true,planKey:'F'},
+];
+
+// 方案對應
+const PLAN_MAP = {
+  A:{name:'客製化推薦 · 旗艦抗老方案',recommended:['G1','G2']},
+  B:{name:'客製化推薦 · 舒緩修護方案',recommended:['G6']},
+  C:{name:'客製化推薦 · 微生態調理方案',recommended:['G5']},
+  D:{name:'客製化推薦 · PDRN 美白方案',recommended:['G4']},
+  E:{name:'客製化推薦 · 深層保濕方案',recommended:['G7']},
+  F:{name:'客製化推薦 · 完整循環方案',recommended:['FULL']},
+};
+
+// 優惠碼
+const COUPONS = {
+  'ANTI300':{discount:300,label:'首購優惠 -NT$300'},
+  'SENSI300':{discount:300,label:'首購優惠 -NT$300'},
+  'MICRO300':{discount:300,label:'首購優惠 -NT$300'},
+  'BRIGHT300':{discount:300,label:'首購優惠 -NT$300'},
+  'HYDRA300':{discount:300,label:'首購優惠 -NT$300'},
+  'FULL300':{discount:300,label:'首購優惠 -NT$300'},
+};
+
+// ── 狀態 ──
+let cart = {}; // {id: qty}
+let recommendedIds = [];
+let appliedCoupon = null;
+
+// ── 從 URL 取得推薦方案 ──
+function initRecommended(){
+  const params = new URLSearchParams(window.location.search);
+  const plan = params.get('plan');
+  const coupon = params.get('coupon');
+
+  if(plan && PLAN_MAP[plan]){
+    const p = PLAN_MAP[plan];
+    recommendedIds = p.recommended;
+    document.getElementById('recName').textContent = p.name;
+    document.getElementById('recBanner').style.display='';
+
+    // 自動填入優惠碼
+    if(coupon){
+      document.getElementById('couponInput').value = coupon;
+    }
+  } else {
+    document.getElementById('recBanner').style.display='none';
+  }
+}
+
+// ── 渲染產品 ──
+function renderProducts(){
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = '';
+
+  // 排序：推薦的優先
+  const sorted = [...PRODUCTS].sort((a,b)=>{
+    const aRec = recommendedIds.includes(a.id)?0:1;
+    const bRec = recommendedIds.includes(b.id)?0:1;
+    return aRec - bRec;
+  });
+
+  sorted.forEach(p=>{
+    const isRec = recommendedIds.includes(p.id);
+    const isSelected = cart[p.id]>0;
+    const qty = cart[p.id]||1;
+
+    const card = document.createElement('div');
+    card.className = `prod-card${isRec?' recommended':''}${isSelected?' selected':''}`;
+    card.id = `card-${p.id}`;
+
+    card.innerHTML = `
+      ${isRec?`<div class="prod-rec-badge">✦ 推薦</div>`:''}
+      <div class="prod-grade">${p.grade}</div>
+      <div class="prod-series">${p.series}</div>
+      <div class="prod-name">${p.name}</div>
+      <div class="prod-en">${p.en}</div>
+      <div class="prod-desc">${p.desc}</div>
+      <div class="prod-count">4 支 × 8 組成分 · 32 天循環</div>
+      <div class="prod-price-row">
+        ${p.isFirstPurchase?`<span style="font-size:12px;color:var(--muted);text-decoration:line-through;margin-right:4px;">NT$ ${p.originalPrice.toLocaleString()}</span>`:''}
+        <span class="prod-price">NT$ ${p.price.toLocaleString()}</span>
+        <span class="prod-price-unit">元</span>
+      </div>
+      ${p.isFirstPurchase?`<div style="font-size:10px;color:#5a9a6a;margin-top:4px;letter-spacing:0.1em;">✦ 首購限定優惠價</div>`:''}
+      <div class="prod-qty" id="qty-${p.id}" style="${isSelected?'':'display:none;'}">
+        <button class="qty-btn" onclick="changeQty('${p.id}',-1,event)">−</button>
+        <span class="qty-num" id="qnum-${p.id}">${qty}</span>
+        <button class="qty-btn" onclick="changeQty('${p.id}',1,event)">+</button>
+      </div>
+      <div class="prod-check">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+    `;
+    card.addEventListener('click', ()=>toggleProduct(p.id));
+    grid.appendChild(card);
+  });
+}
+
+// ── 切換選取 ──
+function toggleProduct(id){
+  if(cart[id]){
+    delete cart[id];
+  } else {
+    cart[id] = 1;
+  }
+  updateCard(id);
+  updateCart();
+}
+
+function updateCard(id){
+  const card = document.getElementById(`card-${id}`);
+  const qtyEl = document.getElementById(`qty-${id}`);
+  if(!card) return;
+  if(cart[id]){
+    card.classList.add('selected');
+    qtyEl.style.display='flex';
+    document.getElementById(`qnum-${id}`).textContent = cart[id];
+  } else {
+    card.classList.remove('selected');
+    qtyEl.style.display='none';
+  }
+}
+
+function changeQty(id, delta, e){
+  e.stopPropagation();
+  const newQty = (cart[id]||0) + delta;
+  if(newQty <= 0){
+    delete cart[id];
+    updateCard(id);
+  } else {
+    cart[id] = newQty;
+    document.getElementById(`qnum-${id}`).textContent = newQty;
+  }
+  updateCart();
+}
+
+// ── 更新購物車 ──
+function updateCart(){
+  const ids = Object.keys(cart);
+  const count = ids.length;
+  document.getElementById('cartCount').textContent = count>0?`已選 ${count} 項方案`:'尚未選擇';
+
+  if(count===0){
+    document.getElementById('cartEmpty').style.display='';
+    document.getElementById('cartItems').style.display='none';
+    document.getElementById('cartTotal').style.display='none';
+    document.getElementById('checkoutBtn').disabled=true;
+    return;
+  }
+
+  document.getElementById('cartEmpty').style.display='none';
+  document.getElementById('cartItems').style.display='';
+  document.getElementById('cartTotal').style.display='';
+  document.getElementById('checkoutBtn').disabled=false;
+
+  // 渲染 items
+  const itemsEl = document.getElementById('cartItems');
+  itemsEl.innerHTML='';
+  let subtotal = 0;
+  ids.forEach(id=>{
+    const p = PRODUCTS.find(x=>x.id===id);
+    if(!p) return;
+    const lineTotal = p.price * cart[id];
+    subtotal += lineTotal;
+    const el = document.createElement('div');
+    el.className='cart-item';
+    el.innerHTML=`
+      <div class="cart-item-left">
+        <div class="cart-item-series">${p.series}</div>
+        <div>
+          <div class="cart-item-name">${p.name}</div>
+          <div class="cart-item-qty">× ${cart[id]} 組</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="cart-item-price">NT$ ${lineTotal.toLocaleString()}</div>
+        <button class="cart-item-remove" onclick="removeItem('${id}')">×</button>
+      </div>
+    `;
+    itemsEl.appendChild(el);
+  });
+
+  // 計算折扣
+  let discount = 0;
+  if(appliedCoupon && COUPONS[appliedCoupon]){
+    discount = COUPONS[appliedCoupon].discount;
+  }
+  const total = Math.max(0, subtotal - discount);
+
+  // 顯示
+  if(ids.length>1 || cart[ids[0]]>1){
+    document.getElementById('totalSubRow').style.display='flex';
+    document.getElementById('totalSub').textContent=`NT$ ${subtotal.toLocaleString()}`;
+  } else {
+    document.getElementById('totalSubRow').style.display='none';
+  }
+
+  if(discount>0){
+    document.getElementById('totalDiscRow').style.display='flex';
+    document.getElementById('discLabel').textContent=COUPONS[appliedCoupon].label;
+    document.getElementById('totalDisc').textContent=`-NT$ ${discount.toLocaleString()}`;
+  } else {
+    document.getElementById('totalDiscRow').style.display='none';
+  }
+
+  document.getElementById('totalAmt').textContent=total.toLocaleString();
+}
+
+function removeItem(id){
+  delete cart[id];
+  updateCard(id);
+  updateCart();
+}
+
+// ── 優惠碼 ──
+function applyCoupon(){
+  const code = document.getElementById('couponInput').value.trim().toUpperCase();
+  const msgEl = document.getElementById('couponMsg');
+  if(!code){msgEl.className='coupon-msg err';msgEl.textContent='請輸入優惠碼';return;}
+  if(COUPONS[code]){
+    appliedCoupon = code;
+    msgEl.className='coupon-msg ok';
+    msgEl.textContent=`✓ 優惠碼套用成功：${COUPONS[code].label}`;
+    updateCart();
+  } else {
+    appliedCoupon = null;
+    msgEl.className='coupon-msg err';
+    msgEl.textContent='優惠碼無效或已過期';
+    updateCart();
+  }
+}
+
+// ── 結帳（目前跳轉至綠界，之後替換連結）──
+function checkout(){
+  if(Object.keys(cart).length===0) return;
+  showToast('即將跳轉至付款頁面...');
+  setTimeout(()=>{
+    // 之後替換為綠界付款連結
+    alert('結帳功能將連結至綠界付款頁，請在綠界設定完成後替換此處連結。');
+  },800);
+}
+
+// ── Toast ──
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// ── 初始化 ──
+initRecommended();
+renderProducts();
+</script>
+</body>
+</html>
