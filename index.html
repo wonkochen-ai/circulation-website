@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PRO◆Pharm · 循環露 CIRCULATION ESSENCE</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700;900&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond&family=Playfair+Display:wght@400;700:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700;900&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
@@ -52,20 +52,6 @@ nav{
   transition:color 0.3s;
 }
 .nav-links a:hover{color:var(--gold2);}
-.nav-links .nav-shop-link{
-  color:var(--gold) !important;
-  border:1px solid var(--border);
-  padding:5px 14px;
-  border-radius:20px;
-  letter-spacing:0.08em;
-  transition:all 0.2s !important;
-}
-.nav-links .nav-shop-link:hover{
-  background:var(--gold);
-  color:var(--ink) !important;
-  border-color:var(--gold);
-}
-
 .nav-cta{
   background:linear-gradient(135deg,#9a7520,var(--gold2));
   color:var(--ink);border:none;border-radius:20px;
@@ -212,8 +198,8 @@ nav{
   gap:4px;
 }
 .story-center-num{
-  font-family:'Playfair Display',serif;
-  font-size:48px;font-weight:300;color:var(--gold2);line-height:1;
+  font-family:'Cormorant Garamond',serif;
+  font-size:48px;font-weight:300;color:var(--gold);line-height:1;
 }
 .story-center-label{font-size:10px;letter-spacing:0.2em;color:var(--muted);}
 @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
@@ -282,19 +268,6 @@ nav{
   display:flex;align-items:flex-start;justify-content:space-between;
   gap:20px;margin-bottom:28px;flex-wrap:wrap;
 }
-
-.pb-img{
-  width:220px;min-width:220px;height:220px;
-  object-fit:contain;border-radius:12px;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(201,168,76,0.15);
-  padding:12px;
-}
-@media(max-width:600px){
-  .pb-img{width:100%;min-width:unset;height:180px;}
-  .pb-header{flex-wrap:wrap;}
-}
-
 .pb-series-tag{
   display:inline-block;
   background:var(--gold4);border:1px solid var(--gold3);
@@ -650,19 +623,6 @@ body::before{
 .system-card:hover,.product-block:hover{
   background:linear-gradient(135deg,var(--white),var(--gold4));
 }
-
-.pb-img{
-  width:220px;min-width:220px;height:220px;
-  object-fit:contain;border-radius:12px;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(201,168,76,0.15);
-  padding:12px;
-}
-@media(max-width:600px){
-  .pb-img{width:100%;min-width:unset;height:180px;}
-  .pb-header{flex-wrap:wrap;}
-}
-
 .pb-series-tag{
   background:linear-gradient(135deg,var(--gold4),var(--pearl));
 }
@@ -682,38 +642,40 @@ body::before{
 }
 
 </style>
-<style>
-  body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
-</style>
-<script>
-  // 禁用右鍵
-  document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
-  // 禁用複製、剪下、選取
-  document.addEventListener('copy', function(e){ e.preventDefault(); });
-  document.addEventListener('cut', function(e){ e.preventDefault(); });
-  // 禁用鍵盤快捷鍵
-  document.addEventListener('keydown', function(e){
-    if((e.ctrlKey || e.metaKey) && ['a','c','u','s'].includes(e.key.toLowerCase())){
-      e.preventDefault();
-    }
-    // 禁用 F12
-    if(e.key === 'F12'){ e.preventDefault(); }
-  });
-</script>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.56 85.04" style="height:55px;width:auto;vertical-align:middle;display:inline-block"><defs><style>.sl{fill:#C9A84C;fill-rule:evenodd}.sl2{fill:#C9A84C}</style></defs><g><path class="sl2" d="M4.36,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM7.93,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/><path class="sl2" d="M16.62,34.74h4.15c1.68,0,3,.43,3.98,1.28.97.85,1.46,2.01,1.46,3.48,0,.75-.18,1.48-.55,2.18-.37.7-.91,1.23-1.61,1.59l2.85,7.01h-3.76l-2.88-7.08h-.06v7.08h-3.56v-15.55ZM20.19,37.75v3.69c1.58-.03,2.36-.58,2.36-1.64,0-.72-.18-1.24-.55-1.55-.36-.31-.97-.48-1.82-.5Z"/><path class="sl2" d="M34.02,50.67c-1.9,0-3.34-.72-4.34-2.16-1-1.44-1.49-3.52-1.49-6.24,0-2.51.5-4.46,1.5-5.86,1-1.4,2.39-2.1,4.18-2.1,1.91,0,3.36.7,4.37,2.11,1.01,1.41,1.51,3.41,1.51,6.02s-.5,4.63-1.49,6.07c-.99,1.44-2.41,2.16-4.24,2.16ZM33.89,37.84c-1.29,0-1.93,1.49-1.93,4.48,0,1.93.16,3.21.49,3.85.33.64.8.97,1.42.97.67,0,1.18-.32,1.53-.97.36-.64.54-1.91.54-3.78,0-3.04-.68-4.55-2.05-4.55Z"/><path class="sl2" d="M66.02,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM69.58,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/><path class="sl2" d="M77.9,33.88h3.41v7.08h.06c.84-1.16,1.81-1.74,2.91-1.74.78,0,1.39.25,1.83.76s.65,1.22.65,2.15v8.15h-3.42v-6.53c0-.42-.08-.75-.25-.98-.17-.24-.4-.36-.7-.36-.71,0-1.07.48-1.07,1.43v6.44h-3.41v-16.41Z"/><path class="sl2" d="M94.66,50.29v-1.41h-.05c-.42.61-.82,1.05-1.21,1.34-.39.29-.85.43-1.37.43-1.03,0-1.85-.52-2.46-1.56-.61-1.04-.92-2.45-.92-4.24s.31-3.08.93-4.1c.62-1.02,1.44-1.53,2.45-1.53.54,0,1,.13,1.38.4.38.27.77.7,1.18,1.29h.05v-1.34h3.42v10.71h-3.4ZM94.66,44.88c0-1.78-.44-2.67-1.32-2.67s-1.33.89-1.33,2.67.46,2.77,1.38,2.77c.85,0,1.27-.92,1.27-2.77Z"/><path class="sl2" d="M103.94,39.58v1.79h.05c.82-1.4,1.67-2.1,2.58-2.1.13,0,.32.02.55.07v3.32c-.42-.07-.8-.1-1.15-.1-1.25,0-1.88.8-1.88,2.41v5.32h-3.41v-10.71h3.27Z"/><path class="sl2" d="M112.37,39.58v1.32c.97-1.13,1.96-1.69,2.96-1.69,1.21,0,1.99.62,2.34,1.85.55-.64,1.06-1.11,1.53-1.41.47-.3,1.03-.44,1.66-.44,1.59,0,2.39,1.1,2.39,3.31v7.78h-3.42v-6.32c0-1.03-.34-1.55-1.01-1.55s-1.04.51-1.04,1.53v6.35h-3.42v-6.51c0-.4-.09-.72-.28-.98-.18-.26-.42-.38-.71-.38-.31,0-.55.12-.74.37-.18.25-.28.59-.28,1.01v6.49h-3.41v-10.71h3.41Z"/></g><g><path class="sl" d="M50.49,35c.77-1.1,1.43-2.29,1.99-3.56.6,1.29,1.28,2.47,2.04,3.56h-4.03ZM55.11,39.53h3.72c-1.39-1.06-2.63-2.3-3.72-3.72v3.72ZM59.85,44.03c1.05-.71,2.2-1.34,3.43-1.91-1.22-.53-2.36-1.15-3.43-1.86v3.77ZM49.86,39.53v-3.68c-1.07,1.37-2.32,2.6-3.76,3.68h3.76ZM45.12,40.23c-1.05.71-2.2,1.34-3.43,1.9,1.22.53,2.37,1.15,3.43,1.86v-3.77ZM55.11,44.73v3.68c1.07-1.37,2.33-2.6,3.77-3.68h-3.77ZM49.86,44.73h-3.72c1.39,1.06,2.62,2.3,3.72,3.72v-3.72ZM50.45,49.26c.76,1.09,1.43,2.27,2.03,3.56.56-1.27,1.22-2.46,2-3.56h-4.03Z"/><rect class="sl2" x="50.56" y="40.22" width="3.85" height="3.81"/></g></svg></div>
+  <div class="nav-logo"><svg style="height:48px;width:auto;vertical-align:middle;display:inline-block" id="_圖層_1" data-name="圖層_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 127.56 85.04">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+  <defs>
+    <style>
+      .st0 { fill: #C9A84C; } .st1 { fill: #C9A84C; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <g>
+    <path class="st0" d="M4.36,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM7.93,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/>
+    <path class="st0" d="M16.62,34.74h4.15c1.68,0,3,.43,3.98,1.28.97.85,1.46,2.01,1.46,3.48,0,.75-.18,1.48-.55,2.18-.37.7-.91,1.23-1.61,1.59l2.85,7.01h-3.76l-2.88-7.08h-.06v7.08h-3.56v-15.55ZM20.19,37.75v3.69c1.58-.03,2.36-.58,2.36-1.64,0-.72-.18-1.24-.55-1.55-.36-.31-.97-.48-1.82-.5Z"/>
+    <path class="st0" d="M34.02,50.67c-1.9,0-3.34-.72-4.34-2.16-1-1.44-1.49-3.52-1.49-6.24,0-2.51.5-4.46,1.5-5.86,1-1.4,2.39-2.1,4.18-2.1,1.91,0,3.36.7,4.37,2.11,1.01,1.41,1.51,3.41,1.51,6.02s-.5,4.63-1.49,6.07c-.99,1.44-2.41,2.16-4.24,2.16ZM33.89,37.84c-1.29,0-1.93,1.49-1.93,4.48,0,1.93.16,3.21.49,3.85.33.64.8.97,1.42.97.67,0,1.18-.32,1.53-.97.36-.64.54-1.91.54-3.78,0-3.04-.68-4.55-2.05-4.55Z"/>
+    <path class="st0" d="M66.02,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM69.58,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/>
+    <path class="st0" d="M77.9,33.88h3.41v7.08h.06c.84-1.16,1.81-1.74,2.91-1.74.78,0,1.39.25,1.83.76s.65,1.22.65,2.15v8.15h-3.42v-6.53c0-.42-.08-.75-.25-.98-.17-.24-.4-.36-.7-.36-.71,0-1.07.48-1.07,1.43v6.44h-3.41v-16.41Z"/>
+    <path class="st0" d="M94.66,50.29v-1.41h-.05c-.42.61-.82,1.05-1.21,1.34-.39.29-.85.43-1.37.43-1.03,0-1.85-.52-2.46-1.56-.61-1.04-.92-2.45-.92-4.24s.31-3.08.93-4.1c.62-1.02,1.44-1.53,2.45-1.53.54,0,1,.13,1.38.4.38.27.77.7,1.18,1.29h.05v-1.34h3.42v10.71h-3.4ZM94.66,44.88c0-1.78-.44-2.67-1.32-2.67s-1.33.89-1.33,2.67.46,2.77,1.38,2.77c.85,0,1.27-.92,1.27-2.77Z"/>
+    <path class="st0" d="M103.94,39.58v1.79h.05c.82-1.4,1.67-2.1,2.58-2.1.13,0,.32.02.55.07v3.32c-.42-.07-.8-.1-1.15-.1-1.25,0-1.88.8-1.88,2.41v5.32h-3.41v-10.71h3.27Z"/>
+    <path class="st0" d="M112.37,39.58v1.32c.97-1.13,1.96-1.69,2.96-1.69,1.21,0,1.99.62,2.34,1.85.55-.64,1.06-1.11,1.53-1.41.47-.3,1.03-.44,1.66-.44,1.59,0,2.39,1.1,2.39,3.31v7.78h-3.42v-6.32c0-1.03-.34-1.55-1.01-1.55s-1.04.51-1.04,1.53v6.35h-3.42v-6.51c0-.4-.09-.72-.28-.98-.18-.26-.42-.38-.71-.38-.31,0-.55.12-.74.37-.18.25-.28.59-.28,1.01v6.49h-3.41v-10.71h3.41Z"/>
+  </g>
+  <g>
+    <path class="st1" d="M50.49,35c.77-1.1,1.43-2.29,1.99-3.56.6,1.29,1.28,2.47,2.04,3.56h-4.03ZM55.11,39.53h3.72c-1.39-1.06-2.63-2.3-3.72-3.72v3.72ZM59.85,44.03c1.05-.71,2.2-1.34,3.43-1.91-1.22-.53-2.36-1.15-3.43-1.86v3.77ZM49.86,39.53v-3.68c-1.07,1.37-2.32,2.6-3.76,3.68h3.76ZM45.12,40.23c-1.05.71-2.2,1.34-3.43,1.9,1.22.53,2.37,1.15,3.43,1.86v-3.77ZM55.11,44.73v3.68c1.07-1.37,2.33-2.6,3.77-3.68h-3.77ZM49.86,44.73h-3.72c1.39,1.06,2.62,2.3,3.72,3.72v-3.72ZM50.45,49.26c.76,1.09,1.43,2.27,2.03,3.56.56-1.27,1.22-2.46,2-3.56h-4.03Z"/>
+    <rect class="st0" x="50.56" y="40.22" width="3.85" height="3.81"/>
+  </g>
+</svg></div>
   <ul class="nav-links">
     <li><a href="#story">品牌</a></li>
     <li><a href="#system">系列</a></li>
     <li><a href="#products">產品</a></li>
     <li><a href="#quiz">保養配對</a></li>
-    <li><a href="shop.html" class="nav-shop-link">立即選購</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">循環露配對</button>
+  <button class="nav-cta" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">開始配對</button>
   <div class="hamburger" onclick="toggleMenu()" id="hamburger">
     <span></span><span></span><span></span>
   </div>
@@ -730,13 +692,33 @@ body::before{
   <div class="hero-bg-grad"></div>
   <div class="hero-lines"></div>
   <div class="hero-content">
-    <div class="hero-badge"><div class="badge-dot"></div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.56 85.04" style="height:60px;width:auto;vertical-align:middle;display:inline-block"><defs><style>.sl{fill:#C9A84C;fill-rule:evenodd}.sl2{fill:#C9A84C}</style></defs><g><path class="sl2" d="M4.36,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM7.93,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/><path class="sl2" d="M16.62,34.74h4.15c1.68,0,3,.43,3.98,1.28.97.85,1.46,2.01,1.46,3.48,0,.75-.18,1.48-.55,2.18-.37.7-.91,1.23-1.61,1.59l2.85,7.01h-3.76l-2.88-7.08h-.06v7.08h-3.56v-15.55ZM20.19,37.75v3.69c1.58-.03,2.36-.58,2.36-1.64,0-.72-.18-1.24-.55-1.55-.36-.31-.97-.48-1.82-.5Z"/><path class="sl2" d="M34.02,50.67c-1.9,0-3.34-.72-4.34-2.16-1-1.44-1.49-3.52-1.49-6.24,0-2.51.5-4.46,1.5-5.86,1-1.4,2.39-2.1,4.18-2.1,1.91,0,3.36.7,4.37,2.11,1.01,1.41,1.51,3.41,1.51,6.02s-.5,4.63-1.49,6.07c-.99,1.44-2.41,2.16-4.24,2.16ZM33.89,37.84c-1.29,0-1.93,1.49-1.93,4.48,0,1.93.16,3.21.49,3.85.33.64.8.97,1.42.97.67,0,1.18-.32,1.53-.97.36-.64.54-1.91.54-3.78,0-3.04-.68-4.55-2.05-4.55Z"/><path class="sl2" d="M66.02,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM69.58,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/><path class="sl2" d="M77.9,33.88h3.41v7.08h.06c.84-1.16,1.81-1.74,2.91-1.74.78,0,1.39.25,1.83.76s.65,1.22.65,2.15v8.15h-3.42v-6.53c0-.42-.08-.75-.25-.98-.17-.24-.4-.36-.7-.36-.71,0-1.07.48-1.07,1.43v6.44h-3.41v-16.41Z"/><path class="sl2" d="M94.66,50.29v-1.41h-.05c-.42.61-.82,1.05-1.21,1.34-.39.29-.85.43-1.37.43-1.03,0-1.85-.52-2.46-1.56-.61-1.04-.92-2.45-.92-4.24s.31-3.08.93-4.1c.62-1.02,1.44-1.53,2.45-1.53.54,0,1,.13,1.38.4.38.27.77.7,1.18,1.29h.05v-1.34h3.42v10.71h-3.4ZM94.66,44.88c0-1.78-.44-2.67-1.32-2.67s-1.33.89-1.33,2.67.46,2.77,1.38,2.77c.85,0,1.27-.92,1.27-2.77Z"/><path class="sl2" d="M103.94,39.58v1.79h.05c.82-1.4,1.67-2.1,2.58-2.1.13,0,.32.02.55.07v3.32c-.42-.07-.8-.1-1.15-.1-1.25,0-1.88.8-1.88,2.41v5.32h-3.41v-10.71h3.27Z"/><path class="sl2" d="M112.37,39.58v1.32c.97-1.13,1.96-1.69,2.96-1.69,1.21,0,1.99.62,2.34,1.85.55-.64,1.06-1.11,1.53-1.41.47-.3,1.03-.44,1.66-.44,1.59,0,2.39,1.1,2.39,3.31v7.78h-3.42v-6.32c0-1.03-.34-1.55-1.01-1.55s-1.04.51-1.04,1.53v6.35h-3.42v-6.51c0-.4-.09-.72-.28-.98-.18-.26-.42-.38-.71-.38-.31,0-.55.12-.74.37-.18.25-.28.59-.28,1.01v6.49h-3.41v-10.71h3.41Z"/></g><g><path class="sl" d="M50.49,35c.77-1.1,1.43-2.29,1.99-3.56.6,1.29,1.28,2.47,2.04,3.56h-4.03ZM55.11,39.53h3.72c-1.39-1.06-2.63-2.3-3.72-3.72v3.72ZM59.85,44.03c1.05-.71,2.2-1.34,3.43-1.91-1.22-.53-2.36-1.15-3.43-1.86v3.77ZM49.86,39.53v-3.68c-1.07,1.37-2.32,2.6-3.76,3.68h3.76ZM45.12,40.23c-1.05.71-2.2,1.34-3.43,1.9,1.22.53,2.37,1.15,3.43,1.86v-3.77ZM55.11,44.73v3.68c1.07-1.37,2.33-2.6,3.77-3.68h-3.77ZM49.86,44.73h-3.72c1.39,1.06,2.62,2.3,3.72,3.72v-3.72ZM50.45,49.26c.76,1.09,1.43,2.27,2.03,3.56.56-1.27,1.22-2.46,2-3.56h-4.03Z"/><rect class="sl2" x="50.56" y="40.22" width="3.85" height="3.81"/></g></svg></div>
-    <div class="hero-en">Circulation Essence</div>
+<svg style="height:70px;width:auto;margin-bottom:28px;display:block;margin-left:auto;margin-right:auto;animation:fadeDown 0.7s ease both;" id="_圖層_1" data-name="圖層_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 127.56 85.04">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+  <defs>
+    <style>
+      .st0 { fill: #C9A84C; } .st1 { fill: #C9A84C; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <g>
+    <path class="st0" d="M4.36,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM7.93,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/>
+    <path class="st0" d="M16.62,34.74h4.15c1.68,0,3,.43,3.98,1.28.97.85,1.46,2.01,1.46,3.48,0,.75-.18,1.48-.55,2.18-.37.7-.91,1.23-1.61,1.59l2.85,7.01h-3.76l-2.88-7.08h-.06v7.08h-3.56v-15.55ZM20.19,37.75v3.69c1.58-.03,2.36-.58,2.36-1.64,0-.72-.18-1.24-.55-1.55-.36-.31-.97-.48-1.82-.5Z"/>
+    <path class="st0" d="M34.02,50.67c-1.9,0-3.34-.72-4.34-2.16-1-1.44-1.49-3.52-1.49-6.24,0-2.51.5-4.46,1.5-5.86,1-1.4,2.39-2.1,4.18-2.1,1.91,0,3.36.7,4.37,2.11,1.01,1.41,1.51,3.41,1.51,6.02s-.5,4.63-1.49,6.07c-.99,1.44-2.41,2.16-4.24,2.16ZM33.89,37.84c-1.29,0-1.93,1.49-1.93,4.48,0,1.93.16,3.21.49,3.85.33.64.8.97,1.42.97.67,0,1.18-.32,1.53-.97.36-.64.54-1.91.54-3.78,0-3.04-.68-4.55-2.05-4.55Z"/>
+    <path class="st0" d="M66.02,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM69.58,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/>
+    <path class="st0" d="M77.9,33.88h3.41v7.08h.06c.84-1.16,1.81-1.74,2.91-1.74.78,0,1.39.25,1.83.76s.65,1.22.65,2.15v8.15h-3.42v-6.53c0-.42-.08-.75-.25-.98-.17-.24-.4-.36-.7-.36-.71,0-1.07.48-1.07,1.43v6.44h-3.41v-16.41Z"/>
+    <path class="st0" d="M94.66,50.29v-1.41h-.05c-.42.61-.82,1.05-1.21,1.34-.39.29-.85.43-1.37.43-1.03,0-1.85-.52-2.46-1.56-.61-1.04-.92-2.45-.92-4.24s.31-3.08.93-4.1c.62-1.02,1.44-1.53,2.45-1.53.54,0,1,.13,1.38.4.38.27.77.7,1.18,1.29h.05v-1.34h3.42v10.71h-3.4ZM94.66,44.88c0-1.78-.44-2.67-1.32-2.67s-1.33.89-1.33,2.67.46,2.77,1.38,2.77c.85,0,1.27-.92,1.27-2.77Z"/>
+    <path class="st0" d="M103.94,39.58v1.79h.05c.82-1.4,1.67-2.1,2.58-2.1.13,0,.32.02.55.07v3.32c-.42-.07-.8-.1-1.15-.1-1.25,0-1.88.8-1.88,2.41v5.32h-3.41v-10.71h3.27Z"/>
+    <path class="st0" d="M112.37,39.58v1.32c.97-1.13,1.96-1.69,2.96-1.69,1.21,0,1.99.62,2.34,1.85.55-.64,1.06-1.11,1.53-1.41.47-.3,1.03-.44,1.66-.44,1.59,0,2.39,1.1,2.39,3.31v7.78h-3.42v-6.32c0-1.03-.34-1.55-1.01-1.55s-1.04.51-1.04,1.53v6.35h-3.42v-6.51c0-.4-.09-.72-.28-.98-.18-.26-.42-.38-.71-.38-.31,0-.55.12-.74.37-.18.25-.28.59-.28,1.01v6.49h-3.41v-10.71h3.41Z"/>
+  </g>
+  <g>
+    <path class="st1" d="M50.49,35c.77-1.1,1.43-2.29,1.99-3.56.6,1.29,1.28,2.47,2.04,3.56h-4.03ZM55.11,39.53h3.72c-1.39-1.06-2.63-2.3-3.72-3.72v3.72ZM59.85,44.03c1.05-.71,2.2-1.34,3.43-1.91-1.22-.53-2.36-1.15-3.43-1.86v3.77ZM49.86,39.53v-3.68c-1.07,1.37-2.32,2.6-3.76,3.68h3.76ZM45.12,40.23c-1.05.71-2.2,1.34-3.43,1.9,1.22.53,2.37,1.15,3.43,1.86v-3.77ZM55.11,44.73v3.68c1.07-1.37,2.33-2.6,3.77-3.68h-3.77ZM49.86,44.73h-3.72c1.39,1.06,2.62,2.3,3.72,3.72v-3.72ZM50.45,49.26c.76,1.09,1.43,2.27,2.03,3.56.56-1.27,1.22-2.46,2-3.56h-4.03Z"/>
+    <rect class="st0" x="50.56" y="40.22" width="3.85" height="3.81"/>
+  </g>
+</svg>
     <h1 class="hero-title">循環露</h1>
-    <div class="hero-tagline"><span style="color:var(--gold2)">8</span> 種頂級系列 · <span style="color:var(--gold2)">32</span> 天完整循環保養系統</div>
+    <div class="hero-tagline">8 種頂級系列 · 32 天完整循環保養系統</div>
     <div class="hero-btns">
-      <button class="btn-hero-primary" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">✦ 循環露保養配對</button>
-      <button class="btn-hero-ghost" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">瞭解產品系列</button>
+      <button class="btn-hero-primary" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">✦ 開始保養配對</button>
+      <button class="btn-hero-ghost" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">了解產品系列</button>
     </div>
   </div>
   <div class="hero-scroll"><div class="scroll-line"></div>SCROLL</div>
@@ -869,7 +851,6 @@ body::before{
     <!-- G1 -->
     <div class="product-block reveal" id="p-g1">
       <div class="pb-header">
-        <img src="images/G1.png" alt="G1 系列產品圖" class="pb-img" onerror="this.style.display='none'">
         <div>
           <div class="pb-series-tag">G1 · 旗艦級</div>
           <div class="pb-name">循環露 G1 細胞外囊泡</div>
@@ -906,7 +887,6 @@ body::before{
     <!-- G2 -->
     <div class="product-block reveal" id="p-g2">
       <div class="pb-header">
-        <img src="images/G2.png" alt="G2 系列產品圖" class="pb-img" onerror="this.style.display='none'">
         <div>
           <div class="pb-series-tag">G2 · 旗艦級</div>
           <div class="pb-name">循環露 G2 幹細胞能量</div>
@@ -944,7 +924,6 @@ body::before{
     <!-- G3 -->
     <div class="product-block reveal" id="p-g3">
       <div class="pb-header">
-        <img src="images/G3.png" alt="G3 系列產品圖" class="pb-img" onerror="this.style.display='none'">
         <div>
           <div class="pb-series-tag">G3 · 主力級</div>
           <div class="pb-name">循環露 G3 胜肽緊緻保養</div>
@@ -981,7 +960,6 @@ body::before{
     <!-- G4 -->
     <div class="product-block reveal" id="p-g4">
       <div class="pb-header">
-        <img src="images/G4.png" alt="G4 系列產品圖" class="pb-img" onerror="this.style.display='none'">
         <div>
           <div class="pb-series-tag">G4 · 主力級</div>
           <div class="pb-name">循環露 G4 PDRN 美白</div>
@@ -1002,7 +980,7 @@ body::before{
           <div class="ing-item"><div class="ing-dot"></div><div class="ing-content"><div class="ing-name-main">多聚脫氧核苷酸（PDRN）</div><div class="ing-name-en">Polydeoxyribonucleotide (PDRN)</div><div class="ing-desc">保養成分，使用後肌膚感覺滋潤柔嫩，賦予肌膚光澤感。</div></div></div>
           <div class="ing-item"><div class="ing-dot"></div><div class="ing-content"><div class="ing-name-main">瑞士七種植物複合萃取</div><div class="ing-name-en">Swiss 7 Herb Complex Extract</div><div class="ing-desc">瑞士專利植物複合萃取，使用後肌膚感覺透亮亮白。</div></div></div>
           <div class="ing-item"><div class="ing-dot"></div><div class="ing-content"><div class="ing-name-main">傳明酸</div><div class="ing-name-en">Tranexamic Acid</div><div class="ing-desc">保養成分，使用後肌膚感覺均勻亮白。</div></div></div>
-          <div class="ing-item"><div class="ing-dot"></div><div class="ing-content"><div class="ing-name-main">4MSK</div><div class="ing-name-en">Potassium Methoxysalicylate</div><div class="ing-desc">使用後肌膚感覺透亮均勻。</div></div></div>
+          <div class="ing-item"><div class="ing-dot"></div><div class="ing-content"><div class="ing-name-main">4MSK（日本資生堂專利）</div><div class="ing-name-en">Potassium Methoxysalicylate</div><div class="ing-desc">日本資生堂專利成分，使用後肌膚感覺透亮均勻。</div></div></div>
         </div>
       </div>
       <div class="usage-section">
@@ -1018,7 +996,6 @@ body::before{
     <!-- G5 -->
     <div class="product-block reveal" id="p-g5">
       <div class="pb-header">
-        <img src="images/G5.png" alt="G5 系列產品圖" class="pb-img" onerror="this.style.display='none'">
         <div>
           <div class="pb-series-tag">G5 · 主力級</div>
           <div class="pb-name">循環露 G5 微生態調理</div>
@@ -1055,7 +1032,6 @@ body::before{
     <!-- G6 -->
     <div class="product-block reveal" id="p-g6">
       <div class="pb-header">
-        <img src="images/G6.png" alt="G6 系列產品圖" class="pb-img" onerror="this.style.display='none'">
         <div>
           <div class="pb-series-tag">G6 · 入門級</div>
           <div class="pb-name">循環露 G6 黑豆舒緩保養</div>
@@ -1092,7 +1068,6 @@ body::before{
     <!-- G7 -->
     <div class="product-block reveal" id="p-g7">
       <div class="pb-header">
-        <img src="images/G7.png" alt="G7 系列產品圖" class="pb-img" onerror="this.style.display='none'">
         <div>
           <div class="pb-series-tag">G7 · 入門級</div>
           <div class="pb-name">循環露 G7 深層保濕</div>
@@ -1129,7 +1104,6 @@ body::before{
     <!-- G8 -->
     <div class="product-block reveal" id="p-g8">
       <div class="pb-header">
-        <img src="images/G8.png" alt="G8 系列產品圖" class="pb-img" onerror="this.style.display='none'">
         <div>
           <div class="pb-series-tag">G8 · 二裂酵母</div>
           <div class="pb-name">循環露 G8 二裂酵母保養</div>
@@ -1192,12 +1166,10 @@ body::before{
         <div class="q-text">請問您的年齡？</div>
         <div class="q-hint">年齡是推薦保養方案的重要依據</div>
         <div class="q-options">
-          <div class="q-opt" onclick="qSelect(this,'q1','18-25')"><div class="q-opt-ind"></div><div class="q-opt-text">18–25 歲 · 保養發起</div></div>
-          <div class="q-opt" onclick="qSelect(this,'q1','26-35')"><div class="q-opt-ind"></div><div class="q-opt-text">26–35 歲 · 黃金期</div></div>
-          <div class="q-opt" onclick="qSelect(this,'q1','36-45')"><div class="q-opt-ind"></div><div class="q-opt-text">36–45 歲 · 進階期</div></div>
-          <div class="q-opt" onclick="qSelect(this,'q1','46-55')"><div class="q-opt-ind"></div><div class="q-opt-text">46–55 歲 · 深層期</div></div>
-          <div class="q-opt" onclick="qSelect(this,'q1','56-65')"><div class="q-opt-ind"></div><div class="q-opt-text">56–65 歲 · 修護期</div></div>
-          <div class="q-opt" onclick="qSelect(this,'q1','65+')"><div class="q-opt-ind"></div><div class="q-opt-text">65 歲以上 · 尊寵期</div></div>
+          <div class="q-opt" onclick="qSelect(this,'q1','18-25')"><div class="q-opt-ind"></div><div class="q-opt-text">18–25 歲 · 青春期後期 / 初入職場</div></div>
+          <div class="q-opt" onclick="qSelect(this,'q1','26-35')"><div class="q-opt-ind"></div><div class="q-opt-text">26–35 歲 · 輕熟齡 / 保養黃金期</div></div>
+          <div class="q-opt" onclick="qSelect(this,'q1','36-45')"><div class="q-opt-ind"></div><div class="q-opt-text">36–45 歲 · 熟齡 / 抗老需求</div></div>
+          <div class="q-opt" onclick="qSelect(this,'q1','46+')"><div class="q-opt-ind"></div><div class="q-opt-text">46 歲以上 · 成熟肌 / 深度抗老</div></div>
         </div>
         <div class="q-nav"><div></div><button class="btn-q-next" id="qn1" onclick="qNext(2)" disabled>下一題 →</button></div>
       </div>
@@ -1211,7 +1183,7 @@ body::before{
           <div class="q-opt" onclick="qSelect(this,'q2','乾性')"><div class="q-opt-ind"></div><div class="q-opt-text">乾性肌 · 緊繃、脫皮、少出油</div></div>
           <div class="q-opt" onclick="qSelect(this,'q2','油性')"><div class="q-opt-ind"></div><div class="q-opt-text">油性肌 · T 字和臉頰都容易出油</div></div>
           <div class="q-opt" onclick="qSelect(this,'q2','混合')"><div class="q-opt-ind"></div><div class="q-opt-text">混合肌 · T 字出油、臉頰偏乾</div></div>
-          <div class="q-opt" onclick="qSelect(this,'q2','敏弱')"><div class="q-opt-ind"></div><div class="q-opt-text">敏弱肌 · 容易不舒適、不穩定</div></div>
+          <div class="q-opt" onclick="qSelect(this,'q2','敏感')"><div class="q-opt-ind"></div><div class="q-opt-text">敏感肌 · 容易泛紅、刺痛、不穩定</div></div>
           <div class="q-opt" onclick="qSelect(this,'q2','不確定')"><div class="q-opt-ind"></div><div class="q-opt-text">不確定 · 讓我們幫你判斷</div></div>
         </div>
         <div class="q-nav"><button class="btn-q-back" onclick="qPrev(1)">← 上一題</button><button class="btn-q-next" id="qn2" onclick="qNext(3)" disabled>下一題 →</button></div>
@@ -1222,15 +1194,14 @@ body::before{
         <div class="q-num">03</div>
         <div class="q-text">最困擾的肌膚問題？</div>
         <div class="q-multi-tag">可複選 1–3 項</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:6px;margin-bottom:2px;letter-spacing:0.03em;">以下為個人膚感描述，供保養配對參考，非醫療診斷依據。</div>
         <div class="q-options">
           <div class="q-opt" onclick="qMulti(this,'q3','細紋皺紋')"><div class="q-opt-ind"></div><div class="q-opt-text">細紋、皺紋明顯</div></div>
           <div class="q-opt" onclick="qMulti(this,'q3','鬆弛')"><div class="q-opt-ind"></div><div class="q-opt-text">鬆弛、缺乏彈性</div></div>
           <div class="q-opt" onclick="qMulti(this,'q3','毛孔')"><div class="q-opt-ind"></div><div class="q-opt-text">毛孔粗大</div></div>
-          <div class="q-opt" onclick="qMulti(this,'q3','痘痘')"><div class="q-opt-ind"></div><div class="q-opt-text">荳荳肌</div></div>
+          <div class="q-opt" onclick="qMulti(this,'q3','痘痘')"><div class="q-opt-ind"></div><div class="q-opt-text">痘痘、粉刺</div></div>
           <div class="q-opt" onclick="qMulti(this,'q3','暗沉')"><div class="q-opt-ind"></div><div class="q-opt-text">暗沉、膚色不均</div></div>
           <div class="q-opt" onclick="qMulti(this,'q3','斑點')"><div class="q-opt-ind"></div><div class="q-opt-text">斑點、色素沉澱</div></div>
-          <div class="q-opt" onclick="qMulti(this,'q3','泛紅')"><div class="q-opt-ind"></div><div class="q-opt-text">敏弱刺刺感</div></div>
+          <div class="q-opt" onclick="qMulti(this,'q3','泛紅')"><div class="q-opt-ind"></div><div class="q-opt-text">泛紅、敏感刺痛</div></div>
           <div class="q-opt" onclick="qMulti(this,'q3','乾燥')"><div class="q-opt-ind"></div><div class="q-opt-text">乾燥、脫皮</div></div>
           <div class="q-opt" onclick="qMulti(this,'q3','出油')"><div class="q-opt-ind"></div><div class="q-opt-text">出油、油光滿面</div></div>
         </div>
@@ -1244,7 +1215,7 @@ body::before{
         <div class="q-hint">如果只能選一個，最在意哪一項</div>
         <div class="q-options">
           <div class="q-opt" onclick="qSelect(this,'q4','抗老')"><div class="q-opt-ind"></div><div class="q-opt-text">抗老逆齡 · 緊緻、使用後肌膚感覺柔嫩緊實</div></div>
-          <div class="q-opt" onclick="qSelect(this,'q4','美白')"><div class="q-opt-ind"></div><div class="q-opt-text">淡化暗色區域 · 使用後肌膚感覺透亮亮白</div></div>
+          <div class="q-opt" onclick="qSelect(this,'q4','美白')"><div class="q-opt-ind"></div><div class="q-opt-text">美白淡斑 · 使用後肌膚感覺透亮亮白</div></div>
           <div class="q-opt" onclick="qSelect(this,'q4','舒緩')"><div class="q-opt-ind"></div><div class="q-opt-text">舒緩保養 · 使用後肌膚感覺舒適穩定</div></div>
           <div class="q-opt" onclick="qSelect(this,'q4','調理')"><div class="q-opt-ind"></div><div class="q-opt-text">調理控油 · 平衡肌膚，使用後感覺清爽</div></div>
           <div class="q-opt" onclick="qSelect(this,'q4','保濕')"><div class="q-opt-ind"></div><div class="q-opt-text">保濕補水 · 使用後肌膚感覺水潤飽滿</div></div>
@@ -1256,12 +1227,12 @@ body::before{
       <!-- Q5 -->
       <div class="q-block" id="qq5">
         <div class="q-num">05</div>
-        <div class="q-text">您的肌膚敏弱程度？</div>
+        <div class="q-text">您的肌膚敏感程度？</div>
         <div class="q-options">
-          <div class="q-opt" onclick="qSelect(this,'q5','非常敏弱')"><div class="q-opt-ind"></div><div class="q-opt-text">非常敏弱 · 常有刺刺感、不穩定</div></div>
-          <div class="q-opt" onclick="qSelect(this,'q5','偶爾敏弱')"><div class="q-opt-ind"></div><div class="q-opt-text">偶爾敏弱 · 換季或壓力大時容易不穩定</div></div>
-          <div class="q-opt" onclick="qSelect(this,'q5','不太敏弱')"><div class="q-opt-ind"></div><div class="q-opt-text">不太敏弱 · 偶爾有點狀況</div></div>
-          <div class="q-opt" onclick="qSelect(this,'q5','完全不敏弱')"><div class="q-opt-ind"></div><div class="q-opt-text">完全不敏弱 · 各種保養品都能使用</div></div>
+          <div class="q-opt" onclick="qSelect(this,'q5','非常敏感')"><div class="q-opt-ind"></div><div class="q-opt-text">非常敏感 · 常泛紅、刺痛、不穩定</div></div>
+          <div class="q-opt" onclick="qSelect(this,'q5','偶爾敏感')"><div class="q-opt-ind"></div><div class="q-opt-text">偶爾敏感 · 換季或壓力大時會敏感</div></div>
+          <div class="q-opt" onclick="qSelect(this,'q5','不太敏感')"><div class="q-opt-ind"></div><div class="q-opt-text">不太敏感 · 偶爾有點狀況</div></div>
+          <div class="q-opt" onclick="qSelect(this,'q5','完全不敏感')"><div class="q-opt-ind"></div><div class="q-opt-text">完全不敏感 · 各種保養品都能使用</div></div>
         </div>
         <div class="q-nav"><button class="btn-q-back" onclick="qPrev(4)">← 上一題</button><button class="btn-q-next" id="qn5" onclick="qNext(6)" disabled>下一題 →</button></div>
       </div>
@@ -1328,18 +1299,18 @@ body::before{
         </div>
         <div class="r-body">
           <div class="r-analysis" id="rAnalysis"></div>
-          <div class="r-plan-title" id="rPlanTitle">32 天客製化保養循環計畫</div>
+          <div class="r-plan-title" id="rPlanTitle">32 天保養循環計畫</div>
           <div class="r-timeline" id="rTimeline"></div>
           <div class="r-tips" id="rTips"></div>
           <div class="r-cta">
             <div class="r-cta-inner">
               <div class="r-cta-tag">✦ 首購專屬優惠</div>
-              <div class="r-cta-title">循環露 32 支全套體驗</div>
-              <div class="r-cta-sub">G1–G8 · 8 大系列 32 支全套入手</div>
+              <div class="r-cta-title">循環露 32 日完整系統</div>
+              <div class="r-cta-sub">8 種頂級系列 · 一次擁有</div>
               <div class="r-price-row"><span class="r-price-orig">NT$ 1,980</span><span class="r-price-main">1,680</span><span class="r-price-unit">元</span></div>
               <div class="r-price-save">首購立省 300 元</div>
               <div class="r-coupon"><span class="r-coupon-label">專屬優惠碼</span><span class="r-coupon-code" id="rCoupon">ANTI300</span></div>
-              <button class="btn-r-buy" id="btnBuy" onclick="goShop()">立即選購 →</button>
+              <button class="btn-r-buy">立即選購 →</button>
             </div>
           </div>
           <button class="btn-r-redo" onclick="resetQuiz()">↺ 重新配對</button>
@@ -1355,7 +1326,28 @@ body::before{
   <div class="footer-inner">
     <div class="footer-top">
       <div>
-        <div class="footer-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.56 85.04" style="height:65px;width:auto;vertical-align:middle;display:inline-block"><defs><style>.sl{fill:#C9A84C;fill-rule:evenodd}.sl2{fill:#C9A84C}</style></defs><g><path class="sl2" d="M4.36,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM7.93,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/><path class="sl2" d="M16.62,34.74h4.15c1.68,0,3,.43,3.98,1.28.97.85,1.46,2.01,1.46,3.48,0,.75-.18,1.48-.55,2.18-.37.7-.91,1.23-1.61,1.59l2.85,7.01h-3.76l-2.88-7.08h-.06v7.08h-3.56v-15.55ZM20.19,37.75v3.69c1.58-.03,2.36-.58,2.36-1.64,0-.72-.18-1.24-.55-1.55-.36-.31-.97-.48-1.82-.5Z"/><path class="sl2" d="M34.02,50.67c-1.9,0-3.34-.72-4.34-2.16-1-1.44-1.49-3.52-1.49-6.24,0-2.51.5-4.46,1.5-5.86,1-1.4,2.39-2.1,4.18-2.1,1.91,0,3.36.7,4.37,2.11,1.01,1.41,1.51,3.41,1.51,6.02s-.5,4.63-1.49,6.07c-.99,1.44-2.41,2.16-4.24,2.16ZM33.89,37.84c-1.29,0-1.93,1.49-1.93,4.48,0,1.93.16,3.21.49,3.85.33.64.8.97,1.42.97.67,0,1.18-.32,1.53-.97.36-.64.54-1.91.54-3.78,0-3.04-.68-4.55-2.05-4.55Z"/><path class="sl2" d="M66.02,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM69.58,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/><path class="sl2" d="M77.9,33.88h3.41v7.08h.06c.84-1.16,1.81-1.74,2.91-1.74.78,0,1.39.25,1.83.76s.65,1.22.65,2.15v8.15h-3.42v-6.53c0-.42-.08-.75-.25-.98-.17-.24-.4-.36-.7-.36-.71,0-1.07.48-1.07,1.43v6.44h-3.41v-16.41Z"/><path class="sl2" d="M94.66,50.29v-1.41h-.05c-.42.61-.82,1.05-1.21,1.34-.39.29-.85.43-1.37.43-1.03,0-1.85-.52-2.46-1.56-.61-1.04-.92-2.45-.92-4.24s.31-3.08.93-4.1c.62-1.02,1.44-1.53,2.45-1.53.54,0,1,.13,1.38.4.38.27.77.7,1.18,1.29h.05v-1.34h3.42v10.71h-3.4ZM94.66,44.88c0-1.78-.44-2.67-1.32-2.67s-1.33.89-1.33,2.67.46,2.77,1.38,2.77c.85,0,1.27-.92,1.27-2.77Z"/><path class="sl2" d="M103.94,39.58v1.79h.05c.82-1.4,1.67-2.1,2.58-2.1.13,0,.32.02.55.07v3.32c-.42-.07-.8-.1-1.15-.1-1.25,0-1.88.8-1.88,2.41v5.32h-3.41v-10.71h3.27Z"/><path class="sl2" d="M112.37,39.58v1.32c.97-1.13,1.96-1.69,2.96-1.69,1.21,0,1.99.62,2.34,1.85.55-.64,1.06-1.11,1.53-1.41.47-.3,1.03-.44,1.66-.44,1.59,0,2.39,1.1,2.39,3.31v7.78h-3.42v-6.32c0-1.03-.34-1.55-1.01-1.55s-1.04.51-1.04,1.53v6.35h-3.42v-6.51c0-.4-.09-.72-.28-.98-.18-.26-.42-.38-.71-.38-.31,0-.55.12-.74.37-.18.25-.28.59-.28,1.01v6.49h-3.41v-10.71h3.41Z"/></g><g><path class="sl" d="M50.49,35c.77-1.1,1.43-2.29,1.99-3.56.6,1.29,1.28,2.47,2.04,3.56h-4.03ZM55.11,39.53h3.72c-1.39-1.06-2.63-2.3-3.72-3.72v3.72ZM59.85,44.03c1.05-.71,2.2-1.34,3.43-1.91-1.22-.53-2.36-1.15-3.43-1.86v3.77ZM49.86,39.53v-3.68c-1.07,1.37-2.32,2.6-3.76,3.68h3.76ZM45.12,40.23c-1.05.71-2.2,1.34-3.43,1.9,1.22.53,2.37,1.15,3.43,1.86v-3.77ZM55.11,44.73v3.68c1.07-1.37,2.33-2.6,3.77-3.68h-3.77ZM49.86,44.73h-3.72c1.39,1.06,2.62,2.3,3.72,3.72v-3.72ZM50.45,49.26c.76,1.09,1.43,2.27,2.03,3.56.56-1.27,1.22-2.46,2-3.56h-4.03Z"/><rect class="sl2" x="50.56" y="40.22" width="3.85" height="3.81"/></g></svg></div>
+        <div class="footer-logo"><svg style="height:48px;width:auto;vertical-align:middle;display:inline-block" id="_圖層_1" data-name="圖層_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 127.56 85.04">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+  <defs>
+    <style>
+      .st0 { fill: #C9A84C; } .st1 { fill: #C9A84C; fill-rule: evenodd; }
+    </style>
+  </defs>
+  <g>
+    <path class="st0" d="M4.36,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM7.93,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/>
+    <path class="st0" d="M16.62,34.74h4.15c1.68,0,3,.43,3.98,1.28.97.85,1.46,2.01,1.46,3.48,0,.75-.18,1.48-.55,2.18-.37.7-.91,1.23-1.61,1.59l2.85,7.01h-3.76l-2.88-7.08h-.06v7.08h-3.56v-15.55ZM20.19,37.75v3.69c1.58-.03,2.36-.58,2.36-1.64,0-.72-.18-1.24-.55-1.55-.36-.31-.97-.48-1.82-.5Z"/>
+    <path class="st0" d="M34.02,50.67c-1.9,0-3.34-.72-4.34-2.16-1-1.44-1.49-3.52-1.49-6.24,0-2.51.5-4.46,1.5-5.86,1-1.4,2.39-2.1,4.18-2.1,1.91,0,3.36.7,4.37,2.11,1.01,1.41,1.51,3.41,1.51,6.02s-.5,4.63-1.49,6.07c-.99,1.44-2.41,2.16-4.24,2.16ZM33.89,37.84c-1.29,0-1.93,1.49-1.93,4.48,0,1.93.16,3.21.49,3.85.33.64.8.97,1.42.97.67,0,1.18-.32,1.53-.97.36-.64.54-1.91.54-3.78,0-3.04-.68-4.55-2.05-4.55Z"/>
+    <path class="st0" d="M66.02,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM69.58,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/>
+    <path class="st0" d="M77.9,33.88h3.41v7.08h.06c.84-1.16,1.81-1.74,2.91-1.74.78,0,1.39.25,1.83.76s.65,1.22.65,2.15v8.15h-3.42v-6.53c0-.42-.08-.75-.25-.98-.17-.24-.4-.36-.7-.36-.71,0-1.07.48-1.07,1.43v6.44h-3.41v-16.41Z"/>
+    <path class="st0" d="M94.66,50.29v-1.41h-.05c-.42.61-.82,1.05-1.21,1.34-.39.29-.85.43-1.37.43-1.03,0-1.85-.52-2.46-1.56-.61-1.04-.92-2.45-.92-4.24s.31-3.08.93-4.1c.62-1.02,1.44-1.53,2.45-1.53.54,0,1,.13,1.38.4.38.27.77.7,1.18,1.29h.05v-1.34h3.42v10.71h-3.4ZM94.66,44.88c0-1.78-.44-2.67-1.32-2.67s-1.33.89-1.33,2.67.46,2.77,1.38,2.77c.85,0,1.27-.92,1.27-2.77Z"/>
+    <path class="st0" d="M103.94,39.58v1.79h.05c.82-1.4,1.67-2.1,2.58-2.1.13,0,.32.02.55.07v3.32c-.42-.07-.8-.1-1.15-.1-1.25,0-1.88.8-1.88,2.41v5.32h-3.41v-10.71h3.27Z"/>
+    <path class="st0" d="M112.37,39.58v1.32c.97-1.13,1.96-1.69,2.96-1.69,1.21,0,1.99.62,2.34,1.85.55-.64,1.06-1.11,1.53-1.41.47-.3,1.03-.44,1.66-.44,1.59,0,2.39,1.1,2.39,3.31v7.78h-3.42v-6.32c0-1.03-.34-1.55-1.01-1.55s-1.04.51-1.04,1.53v6.35h-3.42v-6.51c0-.4-.09-.72-.28-.98-.18-.26-.42-.38-.71-.38-.31,0-.55.12-.74.37-.18.25-.28.59-.28,1.01v6.49h-3.41v-10.71h3.41Z"/>
+  </g>
+  <g>
+    <path class="st1" d="M50.49,35c.77-1.1,1.43-2.29,1.99-3.56.6,1.29,1.28,2.47,2.04,3.56h-4.03ZM55.11,39.53h3.72c-1.39-1.06-2.63-2.3-3.72-3.72v3.72ZM59.85,44.03c1.05-.71,2.2-1.34,3.43-1.91-1.22-.53-2.36-1.15-3.43-1.86v3.77ZM49.86,39.53v-3.68c-1.07,1.37-2.32,2.6-3.76,3.68h3.76ZM45.12,40.23c-1.05.71-2.2,1.34-3.43,1.9,1.22.53,2.37,1.15,3.43,1.86v-3.77ZM55.11,44.73v3.68c1.07-1.37,2.33-2.6,3.77-3.68h-3.77ZM49.86,44.73h-3.72c1.39,1.06,2.62,2.3,3.72,3.72v-3.72ZM50.45,49.26c.76,1.09,1.43,2.27,2.03,3.56.56-1.27,1.22-2.46,2-3.56h-4.03Z"/>
+    <rect class="st0" x="50.56" y="40.22" width="3.85" height="3.81"/>
+  </g>
+</svg></div>
         <div class="footer-desc">循環露 CIRCULATION ESSENCE<br><br>8 種頂級系列 · 32 天完整循環</div>
       </div>
       <div class="footer-col">
@@ -1377,7 +1369,8 @@ body::before{
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-reg">© 2026 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.56 85.04" style="height:14px;width:auto;vertical-align:middle;display:inline-block"><defs><style>.sl{fill:#C9A84C;fill-rule:evenodd}.sl2{fill:#C9A84C}</style></defs><g><path class="sl2" d="M4.36,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM7.93,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/><path class="sl2" d="M16.62,34.74h4.15c1.68,0,3,.43,3.98,1.28.97.85,1.46,2.01,1.46,3.48,0,.75-.18,1.48-.55,2.18-.37.7-.91,1.23-1.61,1.59l2.85,7.01h-3.76l-2.88-7.08h-.06v7.08h-3.56v-15.55ZM20.19,37.75v3.69c1.58-.03,2.36-.58,2.36-1.64,0-.72-.18-1.24-.55-1.55-.36-.31-.97-.48-1.82-.5Z"/><path class="sl2" d="M34.02,50.67c-1.9,0-3.34-.72-4.34-2.16-1-1.44-1.49-3.52-1.49-6.24,0-2.51.5-4.46,1.5-5.86,1-1.4,2.39-2.1,4.18-2.1,1.91,0,3.36.7,4.37,2.11,1.01,1.41,1.51,3.41,1.51,6.02s-.5,4.63-1.49,6.07c-.99,1.44-2.41,2.16-4.24,2.16ZM33.89,37.84c-1.29,0-1.93,1.49-1.93,4.48,0,1.93.16,3.21.49,3.85.33.64.8.97,1.42.97.67,0,1.18-.32,1.53-.97.36-.64.54-1.91.54-3.78,0-3.04-.68-4.55-2.05-4.55Z"/><path class="sl2" d="M66.02,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM69.58,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/><path class="sl2" d="M77.9,33.88h3.41v7.08h.06c.84-1.16,1.81-1.74,2.91-1.74.78,0,1.39.25,1.83.76s.65,1.22.65,2.15v8.15h-3.42v-6.53c0-.42-.08-.75-.25-.98-.17-.24-.4-.36-.7-.36-.71,0-1.07.48-1.07,1.43v6.44h-3.41v-16.41Z"/><path class="sl2" d="M94.66,50.29v-1.41h-.05c-.42.61-.82,1.05-1.21,1.34-.39.29-.85.43-1.37.43-1.03,0-1.85-.52-2.46-1.56-.61-1.04-.92-2.45-.92-4.24s.31-3.08.93-4.1c.62-1.02,1.44-1.53,2.45-1.53.54,0,1,.13,1.38.4.38.27.77.7,1.18,1.29h.05v-1.34h3.42v10.71h-3.4ZM94.66,44.88c0-1.78-.44-2.67-1.32-2.67s-1.33.89-1.33,2.67.46,2.77,1.38,2.77c.85,0,1.27-.92,1.27-2.77Z"/><path class="sl2" d="M103.94,39.58v1.79h.05c.82-1.4,1.67-2.1,2.58-2.1.13,0,.32.02.55.07v3.32c-.42-.07-.8-.1-1.15-.1-1.25,0-1.88.8-1.88,2.41v5.32h-3.41v-10.71h3.27Z"/><path class="sl2" d="M112.37,39.58v1.32c.97-1.13,1.96-1.69,2.96-1.69,1.21,0,1.99.62,2.34,1.85.55-.64,1.06-1.11,1.53-1.41.47-.3,1.03-.44,1.66-.44,1.59,0,2.39,1.1,2.39,3.31v7.78h-3.42v-6.32c0-1.03-.34-1.55-1.01-1.55s-1.04.51-1.04,1.53v6.35h-3.42v-6.51c0-.4-.09-.72-.28-.98-.18-.26-.42-.38-.71-.38-.31,0-.55.12-.74.37-.18.25-.28.59-.28,1.01v6.49h-3.41v-10.71h3.41Z"/></g><g><path class="sl" d="M50.49,35c.77-1.1,1.43-2.29,1.99-3.56.6,1.29,1.28,2.47,2.04,3.56h-4.03ZM55.11,39.53h3.72c-1.39-1.06-2.63-2.3-3.72-3.72v3.72ZM59.85,44.03c1.05-.71,2.2-1.34,3.43-1.91-1.22-.53-2.36-1.15-3.43-1.86v3.77ZM49.86,39.53v-3.68c-1.07,1.37-2.32,2.6-3.76,3.68h3.76ZM45.12,40.23c-1.05.71-2.2,1.34-3.43,1.9,1.22.53,2.37,1.15,3.43,1.86v-3.77ZM55.11,44.73v3.68c1.07-1.37,2.33-2.6,3.77-3.68h-3.77ZM49.86,44.73h-3.72c1.39,1.06,2.62,2.3,3.72,3.72v-3.72ZM50.45,49.26c.76,1.09,1.43,2.27,2.03,3.56.56-1.27,1.22-2.46,2-3.56h-4.03Z"/><rect class="sl2" x="50.56" y="40.22" width="3.85" height="3.81"/></g></svg> · CIRCULATION ESSENCE</div>
+      <div class="footer-reg" style="margin-bottom:6px;">天語生物科技股份有限公司｜統編：27439243｜新竹市民權路266號11樓之2</div>
+      <div class="footer-reg">© 2026 PRO◆Pharm · CIRCULATION ESSENCE · All Rights Reserved</div>
     </div>
   </div>
 </footer>
@@ -1462,8 +1455,8 @@ function showQLoading(){
 
 // ── RESULT DATA ──
 const RESULTS = {
-  B:{label:'客製化推薦 · 舒緩修護方案',type:'敏弱性肌膚',tags:['敏弱肌','舒緩修護','屏障重建'],planTitle:'32 天客製化溫和修護循環計畫',coupon:'SENSI300',
-    analysis:[{k:'膚質類型',v:'敏弱性肌膚'},{k:'主要目標',v:'舒緩保養'},{k:'肌膚狀態',v:'使用後肌膚感覺舒適穩定'},{k:'推薦入門',v:'G6 黑豆舒緩保養'}],
+  B:{label:'舒緩修護方案',type:'敏感性肌膚',tags:['敏感肌','舒緩修護','屏障重建'],planTitle:'32 天溫和修護循環計畫',coupon:'SENSI300',
+    analysis:[{k:'膚質類型',v:'敏感性肌膚'},{k:'主要目標',v:'舒緩保養'},{k:'肌膚狀態',v:'使用後肌膚感覺舒適穩定'},{k:'推薦入門',v:'G6 黑豆舒緩保養'}],
     weeks:[
       {days:'D1–4',icon:'◈',week:'Week 1',name:'G4 PDRN 美白',desc:'使用後肌膚感覺滋潤柔嫩，賦予肌膚光澤感，溫和開啟保養循環。'},
       {days:'D5–8',icon:'⬡',week:'Week 2',name:'G8 二裂酵母',desc:'使用後肌膚感覺柔嫩光滑，賦予肌膚透亮光澤感，穩定膚況。'},
@@ -1476,7 +1469,7 @@ const RESULTS = {
     ],
     tips:['避免頻繁更換保養品，讓肌膚適應保養節奏','溫和清潔，不過度清潔','加強防曬，減少外部刺激','作息規律，保持穩定生活節奏'],
   },
-  C:{label:'客製化推薦 · 微生態調理方案',type:'油性 / 痘痘肌',tags:['油性肌','微生態調理','清爽控油'],planTitle:'32 天客製化調理循環計畫',coupon:'MICRO300',
+  C:{label:'微生態調理方案',type:'油性 / 痘痘肌',tags:['油性肌','微生態調理','清爽控油'],planTitle:'32 天調理循環計畫',coupon:'MICRO300',
     analysis:[{k:'膚質類型',v:'油性 / 痘痘肌'},{k:'主要目標',v:'調理控油'},{k:'肌膚狀態',v:'使用後肌膚感覺清爽均衡'},{k:'推薦入門',v:'G5 微生態調理'}],
     weeks:[
       {days:'D1–4',icon:'◎',week:'Week 1',name:'G5 微生態調理',desc:'使用後肌膚感覺舒適柔嫩，賦予肌膚水潤均衡感，開始調理。'},
@@ -1490,7 +1483,7 @@ const RESULTS = {
     ],
     tips:['徹底清潔，但不過度清潔','建議搭配溫和潔顏，避免破壞肌膚平衡','保持枕套清潔，減少外部刺激','飲食均衡，有助於維持肌膚狀態'],
   },
-  D:{label:'客製化推薦 · PDRN 美白方案',type:'暗沉 / 色素型',tags:['美白保養','亮白光澤','均勻膚色'],planTitle:'32 天客製化美白亮白循環計畫',coupon:'BRIGHT300',
+  D:{label:'PDRN 美白方案',type:'暗沉 / 色素型',tags:['美白保養','亮白光澤','均勻膚色'],planTitle:'32 天美白亮白循環計畫',coupon:'BRIGHT300',
     analysis:[{k:'膚質類型',v:'暗沉 / 色素型肌膚'},{k:'主要目標',v:'美白保養'},{k:'肌膚狀態',v:'使用後肌膚感覺透亮亮白'},{k:'推薦入門',v:'G4 PDRN 美白'}],
     weeks:[
       {days:'D1–4',icon:'✦',week:'Week 1',name:'G1 細胞外囊泡',desc:'使用後肌膚感覺賦活柔嫩，賦予肌膚光澤感，提升代謝。'},
@@ -1504,7 +1497,7 @@ const RESULTS = {
     ],
     tips:['防曬是美白保養最重要的一步（全年防曬）','日間使用美白成分務必搭配 SPF30 以上防曬','多攝取蔬果，補充保養所需營養','充足睡眠，讓肌膚維持最佳保養狀態'],
   },
-  E:{label:'客製化推薦 · 深層保濕方案',type:'乾性缺水肌',tags:['乾性肌','深層保濕','屏障修護'],planTitle:'32 天客製化保濕滋養循環計畫',coupon:'HYDRA300',
+  E:{label:'深層保濕方案',type:'乾性缺水肌',tags:['乾性肌','深層保濕','屏障修護'],planTitle:'32 天保濕滋養循環計畫',coupon:'HYDRA300',
     analysis:[{k:'膚質類型',v:'乾性缺水肌'},{k:'主要目標',v:'深層保濕'},{k:'肌膚狀態',v:'使用後肌膚感覺水潤飽滿'},{k:'推薦入門',v:'G7 深層保濕'}],
     weeks:[
       {days:'D1–4',icon:'◈',week:'Week 1',name:'G4 PDRN 美白',desc:'使用後肌膚感覺滋潤柔嫩，賦予肌膚光澤感，開啟保濕循環。'},
@@ -1518,7 +1511,7 @@ const RESULTS = {
     ],
     tips:['避免過熱水洗臉，建議使用微涼或溫水','洗臉後立即進行後續保養步驟','使用加濕器有助於維持肌膚水潤感','多補充水分，由內而外呵護肌膚'],
   },
-  A:{label:'客製化推薦 · 旗艦抗老方案',type:'熟齡肌',tags:['熟齡肌','胜肽緊緻','逆齡保養'],planTitle:'32 天客製化旗艦抗老循環計畫',coupon:'ANTI300',
+  A:{label:'旗艦抗老方案',type:'熟齡肌',tags:['熟齡肌','胜肽緊緻','逆齡保養'],planTitle:'32 天旗艦抗老循環計畫',coupon:'ANTI300',
     analysis:[{k:'膚質類型',v:'熟齡肌'},{k:'主要目標',v:'抗老逆齡'},{k:'肌膚狀態',v:'使用後肌膚感覺緊緻柔嫩'},{k:'推薦旗艦',v:'G1 + G2 旗艦系列'}],
     weeks:[
       {days:'D1–4',icon:'✦',week:'Week 1',name:'G1 細胞外囊泡',desc:'使用後肌膚感覺賦活柔嫩，賦予肌膚光澤感，啟動保養循環。'},
@@ -1532,7 +1525,7 @@ const RESULTS = {
     ],
     tips:['搭配輕柔臉部按摩，有助於感受更佳保養效果','早晚使用防曬（日間保養關鍵步驟）','充足睡眠，讓肌膚在夜間充分吸收保養成分','持續使用 32 天以上，感受最佳保養效果'],
   },
-  F:{label:'客製化推薦 · 完整循環方案',type:'綜合型肌膚',tags:['綜合型','完整循環','全面保養'],planTitle:'32 天客製化完整循環計畫',coupon:'FULL300',
+  F:{label:'完整循環方案',type:'綜合型肌膚',tags:['綜合型','完整循環','全面保養'],planTitle:'32 天完整循環計畫',coupon:'FULL300',
     analysis:[{k:'膚質類型',v:'綜合型肌膚'},{k:'主要目標',v:'全面保養'},{k:'肌膚狀態',v:'建議完整循環，全面呵護'},{k:'推薦入門',v:'G8 二裂酵母（入門首選）'}],
     weeks:[
       {days:'D1–4',icon:'✦',week:'Week 1',name:'G1 細胞外囊泡',desc:'使用後肌膚感覺賦活柔嫩，賦予肌膚光澤感，開啟完整循環。'},
@@ -1550,7 +1543,7 @@ const RESULTS = {
 
 function decide(){
   const q2=qa.q2, q3=qa.q3, q4=qa.q4, q5=qa.q5, age=qa.q1;
-  if(q2==='敏弱'||q5==='非常敏弱'||q4==='舒緩') return 'B';
+  if(q2==='敏感'||q5==='非常敏感'||q4==='舒緩') return 'B';
   if(q2==='油性'||q4==='調理'||q3.includes('痘痘')||q3.includes('出油')) return 'C';
   if(q4==='美白'||q3.includes('暗沉')||q3.includes('斑點')) return 'D';
   if(q2==='乾性'||q4==='保濕'||q3.includes('乾燥')) return 'E';
@@ -1612,13 +1605,6 @@ function resetQuiz(){
   [1,2,3,4].forEach(i=>document.getElementById('ls'+i).classList.remove('show'));
   document.getElementById('qResult').style.display='none';
   document.getElementById('qLoading').style.display='none';
-}
-
-function goShop(){
-  const key = decide();
-  const r = RESULTS[key];
-  const coupon = r.coupon || '';
-  window.location.href = 'shop.html?plan='+key+'&coupon='+coupon;
 }
 </script>
 </body>
