@@ -563,6 +563,8 @@ nav{
 .r-coupon-code{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--gold2);letter-spacing:0.2em;}
 .btn-r-buy{display:block;width:100%;background:linear-gradient(135deg,#9a7520,var(--gold2));color:var(--ink);border:none;border-radius:50px;padding:16px;font-family:'Noto Serif TC',serif;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:0.08em;transition:all 0.3s;box-shadow:0 6px 20px rgba(184,145,42,0.3);}
 .btn-r-buy:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(184,145,42,0.45);}
+.btn-r-pdf{display:block;width:100%;background:none;border:1px solid rgba(184,145,42,0.4);border-radius:50px;padding:13px;font-size:13px;color:var(--gold2);cursor:pointer;transition:all 0.3s;margin-top:10px;letter-spacing:0.05em;}
+.btn-r-pdf:hover{background:rgba(184,145,42,0.08);border-color:var(--gold2);}
 .btn-r-redo{display:block;width:100%;background:none;border:1px solid rgba(255,255,255,0.1);border-radius:50px;padding:12px;font-size:12px;color:rgba(255,255,255,0.3);cursor:pointer;transition:all 0.3s;margin-top:10px;}
 .btn-r-redo:hover{border-color:rgba(184,145,42,0.3);color:var(--gold2);}
 
@@ -1313,7 +1315,8 @@ body::before{
               <div class="r-price-row"><span class="r-price-orig">NT$ 1,980</span><span class="r-price-main">1,680</span><span class="r-price-unit">元</span></div>
               <div class="r-price-save">首購立省 300 元</div>
               <div class="r-coupon"><span class="r-coupon-label">專屬優惠碼</span><span class="r-coupon-code" id="rCoupon">ANTI300</span></div>
-              <button class="btn-r-buy">立即選購 →</button>
+              <button class="btn-r-buy" onclick="window.location.href='shop.html'">立即選購 →</button>
+              <button class="btn-r-pdf" onclick="downloadPDF()">📄 下載保養分析報告</button>
             </div>
           </div>
           <button class="btn-r-redo" onclick="resetQuiz()">↺ 重新配對</button>
@@ -1395,6 +1398,7 @@ revealEls.forEach(el=>ro.observe(el));
 
 // ── QUIZ STATE ──
 const qa = {q1:'',q2:'',q3:[],q4:'',q5:'',q6:'',q7:'',email:'',name:'',phone:''};
+let currentResult = null;
 
 function qSelect(el, key, val){
   const block = el.closest('.q-block');
@@ -1558,6 +1562,7 @@ function buildResult(){
   const key = decide();
   const r = RESULTS[key];
   const name = qa.name || '您';
+  currentResult = r; // 儲存給 PDF 使用
 
   document.getElementById('rGreeting').textContent = 'Hi，'+name;
   document.getElementById('rTitle').textContent = r.label;
@@ -1607,7 +1612,125 @@ function resetQuiz(){
   [1,2,3,4].forEach(i=>document.getElementById('ls'+i).classList.remove('show'));
   document.getElementById('qResult').style.display='none';
   document.getElementById('qLoading').style.display='none';
+
+function downloadPDF() {
+  const r = currentResult;
+  if (!r) return;
+
+  const userName = document.getElementById('qName')?.value || '親愛的保養達人';
+  const coupon = document.getElementById('rCoupon')?.textContent || r.coupon;
+  const planTitle = document.getElementById('rPlanTitle')?.textContent || r.planTitle;
+  const skinType = r.type;
+  const analysis = r.analysis;
+  const tips = r.tips || [];
+
+  const html = `<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Noto Sans TC',sans-serif; background:#fff; color:#1a1208; width:794px; margin:0 auto; }
+  .cover { background:linear-gradient(135deg,#0d0a05,#1a1208); color:#fff; padding:60px 50px 50px; min-height:280px; position:relative; }
+  .cover-badge { display:inline-block; border:1px solid rgba(201,168,76,0.4); border-radius:20px; padding:5px 16px; font-size:10px; letter-spacing:0.25em; color:rgba(201,168,76,0.7); margin-bottom:20px; text-transform:uppercase; }
+  .cover-brand { font-family:'Noto Serif TC',serif; font-size:13px; letter-spacing:0.4em; color:rgba(201,168,76,0.5); margin-bottom:8px; }
+  .cover-title { font-family:'Noto Serif TC',serif; font-size:28px; font-weight:700; color:#E8C97A; margin-bottom:6px; }
+  .cover-sub { font-size:13px; color:rgba(255,255,255,0.4); margin-bottom:24px; }
+  .cover-name { font-size:15px; color:rgba(255,255,255,0.7); }
+  .cover-name span { color:#E8C97A; font-weight:600; }
+  .cover-date { position:absolute; bottom:24px; right:50px; font-size:11px; color:rgba(255,255,255,0.2); letter-spacing:0.1em; }
+  .section { padding:32px 50px; border-bottom:1px solid #f0ebe0; }
+  .section-title { font-size:10px; letter-spacing:0.25em; color:#C9A84C; text-transform:uppercase; margin-bottom:16px; }
+  .skin-type { font-family:'Noto Serif TC',serif; font-size:22px; font-weight:700; color:#1a1208; margin-bottom:6px; }
+  .plan-name { font-size:14px; color:#7a6a3a; margin-bottom:20px; }
+  .tags { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:0; }
+  .tag { background:#faf5e8; border:1px solid #e8d89a; border-radius:20px; padding:4px 14px; font-size:11px; color:#7a6a3a; }
+  .analysis-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .analysis-item { background:#faf5e8; border-radius:10px; padding:14px 16px; }
+  .analysis-key { font-size:10px; color:#9a8a5a; letter-spacing:0.1em; margin-bottom:4px; }
+  .analysis-val { font-size:13px; font-weight:600; color:#1a1208; }
+  .tips-list { display:flex; flex-direction:column; gap:10px; }
+  .tip { display:flex; gap:12px; align-items:flex-start; }
+  .tip-dot { width:20px; height:20px; border-radius:50%; background:#C9A84C; color:#fff; font-size:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; font-weight:700; }
+  .tip-text { font-size:12px; color:#3a2e10; line-height:1.7; }
+  .coupon-box { background:linear-gradient(135deg,#0d0a05,#1a1208); border-radius:16px; padding:28px 30px; text-align:center; }
+  .coupon-label { font-size:11px; letter-spacing:0.2em; color:rgba(201,168,76,0.5); margin-bottom:8px; }
+  .coupon-code { font-family:'Noto Serif TC',serif; font-size:32px; font-weight:700; color:#E8C97A; letter-spacing:0.3em; margin-bottom:8px; }
+  .coupon-desc { font-size:12px; color:rgba(255,255,255,0.35); margin-bottom:16px; }
+  .coupon-link { display:inline-block; background:#C9A84C; color:#0d0a05; border-radius:30px; padding:10px 28px; font-size:13px; font-weight:700; text-decoration:none; letter-spacing:0.05em; }
+  .footer { padding:24px 50px; text-align:center; background:#faf5e8; }
+  .footer-text { font-size:10px; color:#9a8a5a; letter-spacing:0.15em; line-height:1.8; }
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="cover-badge">✦ 保養分析報告</div>
+  <div class="cover-brand">PRO◆PHARM · CIRCULATION ESSENCE</div>
+  <div class="cover-title">循環露個人保養方案</div>
+  <div class="cover-sub">32 天完整循環保養系統 · 專屬分析</div>
+  <div class="cover-name">為 <span>${userName}</span> 量身配對</div>
+  <div class="cover-date">報告日期：${new Date().toLocaleDateString('zh-TW')}</div>
+</div>
+
+<div class="section">
+  <div class="section-title">膚質分析結果</div>
+  <div class="skin-type">${skinType}</div>
+  <div class="plan-name">${planTitle}</div>
+  <div class="tags">${(r.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+</div>
+
+<div class="section">
+  <div class="section-title">個人膚況評估</div>
+  <div class="analysis-grid">
+    ${(analysis||[]).map(a=>`
+    <div class="analysis-item">
+      <div class="analysis-key">${a.k}</div>
+      <div class="analysis-val">${a.v}</div>
+    </div>`).join('')}
+  </div>
+</div>
+
+${tips.length > 0 ? `
+<div class="section">
+  <div class="section-title">專屬保養建議</div>
+  <div class="tips-list">
+    ${tips.map((t,i)=>`
+    <div class="tip">
+      <div class="tip-dot">${i+1}</div>
+      <div class="tip-text">${t}</div>
+    </div>`).join('')}
+  </div>
+</div>` : ''}
+
+<div class="section" style="border-bottom:none;">
+  <div class="coupon-box">
+    <div class="coupon-label">首購專屬優惠碼</div>
+    <div class="coupon-code">${coupon}</div>
+    <div class="coupon-desc">首購立省 NT$300 · 限時專屬</div>
+    <a class="coupon-link" href="https://wonkochen-ai.github.io/circulation-website/shop.html">立即選購 →</a>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-text">
+    天語生物科技股份有限公司｜統編：27439243｜新竹市民權路266號11樓之2<br>
+    PRO◆Pharm · 循環露 CIRCULATION ESSENCE · circulation-essence.app
+  </div>
+</div>
+</body>
+</html>`;
+
+  // 開新視窗列印為PDF
+  const win = window.open('', '_blank');
+  win.document.write(html);
+  win.document.close();
+  win.onload = () => {
+    setTimeout(() => {
+      win.print();
+    }, 800);
+  };
 }
-</script>
+
 </body>
 </html>
