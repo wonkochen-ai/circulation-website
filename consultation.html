@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>保養諮詢 · 循環露 CIRCULATION ESSENCE</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700;900&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#1a1510;
+  --ink2:#3d2e1c;
+  --gold:#c9a84c;
+  --gold2:#e8c96a;
+  --gold3:#f5e4b0;
+  --gold4:#fdf8ec;
+  --cream:#f9f6f0;
+  --white:#fffefb;
+  --pearl:#f5f0e8;
+  --pearl2:#ede5d8;
+  --muted:#9a8870;
+  --border:rgba(201,168,76,0.2);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--ink);color:var(--white);min-height:100vh;overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(20,15,8,0.97);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(184,145,42,0.15);
+  padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+}
+.nav-logo{
+  display:flex;align-items:center;
+  text-decoration:none;
+  opacity:0.92;
+  transition:opacity 0.3s;
+}
+.nav-logo:hover{opacity:1;}
+.nav-back{
+  font-size:12px;letter-spacing:0.12em;color:rgba(255,255,255,0.4);
+  text-decoration:none;transition:color 0.3s;
+  display:flex;align-items:center;gap:6px;
+}
+.nav-back:hover{color:var(--gold2);}
+
+/* ── HERO ── */
+.hero{
+  padding:140px 24px 60px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(184,145,42,0.1) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:10px;letter-spacing:0.25em;color:var(--gold2);
+  text-transform:uppercase;margin-bottom:20px;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:28px;height:1px;background:rgba(184,145,42,0.4);}
+.hero-title{
+  font-family:'Noto Serif TC',serif;
+  font-size:clamp(28px,5vw,44px);
+  font-weight:700;color:#fff;
+  line-height:1.25;margin-bottom:16px;
+}
+.hero-sub{
+  font-size:15px;color:rgba(255,255,255,0.45);
+  line-height:1.8;max-width:460px;margin:0 auto 10px;
+}
+.hero-note{
+  font-size:12px;color:rgba(184,145,42,0.5);
+  letter-spacing:0.08em;
+}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap{
+  max-width:640px;margin:40px auto 0;
+  padding:0 24px;
+}
+.progress-meta{
+  display:flex;justify-content:space-between;
+  font-size:11px;margin-bottom:10px;
+}
+.progress-label{color:var(--gold2);letter-spacing:0.15em;text-transform:uppercase;}
+.progress-count{color:rgba(255,255,255,0.3);}
+.progress-track{height:2px;background:rgba(255,255,255,0.08);border-radius:1px;overflow:hidden;}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  border-radius:1px;
+  transition:width 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ── QUESTION CARD ── */
+.questions-wrap{
+  max-width:640px;margin:0 auto;
+  padding:32px 24px 80px;
+}
+.q-card{
+  display:none;
+  animation:fadeUp 0.4s ease both;
+}
+.q-card.active{display:block;}
+
+.q-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:64px;font-weight:300;
+  color:rgba(184,145,42,0.15);
+  line-height:1;margin-bottom:4px;
+}
+.q-title{
+  font-family:'Noto Serif TC',serif;
+  font-size:20px;font-weight:700;
+  color:#fff;line-height:1.45;
+  margin-bottom:6px;
+}
+.q-hint{
+  font-size:12px;color:rgba(255,255,255,0.28);
+  font-style:italic;margin-bottom:28px;
+}
+.q-multi-badge{
+  display:inline-block;
+  background:rgba(184,145,42,0.1);
+  border:1px solid rgba(184,145,42,0.25);
+  border-radius:20px;padding:4px 14px;
+  font-size:10px;letter-spacing:0.1em;
+  color:var(--gold2);margin-bottom:18px;
+}
+
+/* 選項 */
+.q-options{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
+.q-opt{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:14px;padding:15px 18px;
+  cursor:pointer;display:flex;align-items:center;gap:14px;
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.q-opt::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--gold);transform:scaleY(0);transition:transform 0.2s;
+  border-radius:0 2px 2px 0;
+}
+.q-opt:hover{
+  border-color:rgba(184,145,42,0.3);
+  background:rgba(184,145,42,0.05);
+  transform:translateX(3px);
+}
+.q-opt:hover::before{transform:scaleY(1);}
+.q-opt.selected{
+  border-color:rgba(184,145,42,0.5);
+  background:rgba(184,145,42,0.09);
+  transform:translateX(3px);
+}
+.q-opt.selected::before{transform:scaleY(1);}
+.q-opt-label{
+  width:26px;height:26px;border-radius:50%;
+  border:1px solid rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);
+  flex-shrink:0;transition:all 0.2s;
+  font-family:'Cormorant Garamond',serif;
+}
+.q-opt.selected .q-opt-label{
+  background:var(--gold);border-color:var(--gold);color:var(--ink);
+}
+.q-opt-text{font-size:14px;color:rgba(255,255,255,0.78);line-height:1.45;}
+
+/* 導航按鈕 */
+.q-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.btn-back{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:50px;padding:12px 26px;
+  font-size:12px;color:rgba(255,255,255,0.35);
+  cursor:pointer;transition:all 0.3s;letter-spacing:0.05em;
+}
+.btn-back:hover{border-color:rgba(184,145,42,0.3);color:var(--gold2);}
+.btn-next{
+  background:linear-gradient(135deg,#9a7520,var(--gold2));
+  color:var(--ink);border:none;border-radius:50px;
+  padding:14px 36px;
+  font-family:'Noto Serif TC',serif;
+  font-size:14px;font-weight:700;
+  cursor:pointer;transition:all 0.3s;
+  letter-spacing:0.08em;
+  box-shadow:0 6px 20px rgba(184,145,42,0.25);
+}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(184,145,42,0.4);}
+.btn-next:disabled{opacity:0.3;pointer-events:none;box-shadow:none;}
+
+/* ── RESULT ── */
+.result-wrap{
+  display:none;
+  max-width:640px;margin:0 auto;
+  padding:32px 24px 80px;
+  animation:fadeUp 0.5s ease both;
+}
+
+.result-hero{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(184,145,42,0.2);
+  border-radius:24px;padding:32px;
+  margin-bottom:20px;
+  position:relative;overflow:hidden;
+}
+.result-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(184,145,42,0.12) 0%,transparent 70%);
+}
+.result-hero-inner{position:relative;z-index:1;}
+.result-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#9a7520,var(--gold2));
+  color:var(--ink);border-radius:20px;
+  padding:5px 14px;font-size:10px;
+  letter-spacing:0.18em;margin-bottom:16px;font-weight:700;
+}
+.result-greeting{
+  font-size:12px;letter-spacing:0.15em;
+  color:var(--gold2);margin-bottom:6px;
+}
+.result-title{
+  font-family:'Noto Serif TC',serif;
+  font-size:22px;font-weight:700;color:#fff;
+  line-height:1.4;margin-bottom:6px;
+}
+.result-sub{
+  font-size:13px;color:rgba(255,255,255,0.35);
+  line-height:1.7;
+}
+
+/* 排列卡片 */
+.result-plan-title{
+  font-family:'Noto Serif TC',serif;
+  font-size:13px;letter-spacing:0.2em;
+  color:var(--gold2);text-transform:uppercase;
+  text-align:center;margin:28px 0 16px;
+  display:flex;align-items:center;gap:12px;
+}
+.result-plan-title::before,.result-plan-title::after{
+  content:'';flex:1;height:1px;
+  background:rgba(184,145,42,0.2);
+}
+
+.plan-list{display:flex;flex-direction:column;gap:8px;margin-bottom:28px;}
+.plan-item{
+  display:flex;align-items:stretch;gap:0;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(184,145,42,0.13);
+  border-radius:14px;overflow:hidden;
+  transition:border-color 0.3s;
+}
+.plan-item:hover{border-color:rgba(184,145,42,0.3);}
+.plan-week{
+  width:80px;flex-shrink:0;
+  background:rgba(184,145,42,0.08);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:14px 8px;gap:2px;
+  border-right:1px solid rgba(184,145,42,0.1);
+}
+.plan-week-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:600;
+  color:rgba(184,145,42,0.5);line-height:1;
+}
+.plan-week-days{
+  font-size:9px;letter-spacing:0.1em;
+  color:rgba(255,255,255,0.2);
+}
+.plan-body{
+  flex:1;padding:14px 18px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.plan-series{
+  font-size:10px;letter-spacing:0.18em;
+  color:var(--gold2);margin-bottom:3px;opacity:0.7;
+}
+.plan-name{
+  font-family:'Noto Serif TC',serif;
+  font-size:16px;font-weight:700;color:#fff;
+  margin-bottom:4px;
+}
+.plan-role{
+  font-size:12px;color:rgba(255,255,255,0.32);
+  line-height:1.5;
+}
+.plan-role strong{color:rgba(184,145,42,0.7);font-weight:500;}
+
+/* 注意事項 */
+.result-notes{
+  background:rgba(184,145,42,0.05);
+  border:1px solid rgba(184,145,42,0.15);
+  border-radius:16px;padding:20px 22px;
+  margin-bottom:24px;
+}
+.result-notes-title{
+  font-size:11px;letter-spacing:0.15em;
+  color:var(--gold2);text-transform:uppercase;
+  margin-bottom:14px;display:flex;align-items:center;gap:8px;
+}
+.result-notes-title::after{content:'';flex:1;height:1px;background:rgba(184,145,42,0.15);}
+.note-item{
+  display:flex;gap:10px;align-items:flex-start;
+  font-size:13px;color:rgba(255,255,255,0.45);
+  line-height:1.6;margin-bottom:8px;
+}
+.note-item:last-child{margin-bottom:0;}
+.note-dot{
+  width:4px;height:4px;border-radius:50%;
+  background:var(--gold);flex-shrink:0;margin-top:7px;
+}
+
+/* LINE CTA */
+.result-cta{
+  text-align:center;
+  padding:28px 24px;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(184,145,42,0.13);
+  border-radius:20px;
+}
+.result-cta-text{
+  font-size:14px;color:rgba(255,255,255,0.45);
+  line-height:1.7;margin-bottom:20px;
+}
+.btn-line{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#06C755;color:#fff;
+  font-size:16px;font-weight:700;letter-spacing:0.05em;
+  padding:16px 36px;border-radius:50px;
+  text-decoration:none;
+  box-shadow:0 8px 28px rgba(6,199,85,0.3);
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.btn-line:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(6,199,85,0.45);}
+.btn-redo{
+  display:block;margin:14px auto 0;
+  background:none;border:none;
+  font-size:12px;color:rgba(255,255,255,0.2);
+  cursor:pointer;letter-spacing:0.08em;
+  transition:color 0.3s;
+}
+.btn-redo:hover{color:var(--gold2);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ── LOADING ── */
+.loading-wrap{
+  display:none;text-align:center;padding:60px 0;
+}
+.loading-ring{
+  width:56px;height:56px;margin:0 auto 24px;
+  border-radius:50%;
+  border:2px solid rgba(184,145,42,0.12);
+  border-top-color:var(--gold);
+  animation:spin 1.2s linear infinite;
+}
+.loading-text{
+  font-family:'Noto Serif TC',serif;
+  font-size:16px;color:rgba(255,255,255,0.5);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:480px){
+  nav{padding:0 16px;}
+  .hero{padding:120px 16px 48px;}
+  .progress-wrap{padding:0 16px;}
+  .questions-wrap,.result-wrap{padding:24px 16px 60px;}
+  .q-num{font-size:48px;}
+  .q-title{font-size:17px;}
+  .plan-week{width:64px;}
+  .plan-week-num{font-size:18px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><svg style="height:36px;width:auto;vertical-align:middle;display:inline-block;" id="_圖層_c" data-name="圖層_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 127.56 85.04">
+  <defs><style>.stc0{fill:#C9A84C;}.stc1{fill:#C9A84C;fill-rule:evenodd;}</style></defs>
+  <g>
+    <path class="stc0" d="M4.36,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM7.93,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/>
+    <path class="stc0" d="M16.62,34.74h4.15c1.68,0,3,.43,3.98,1.28.97.85,1.46,2.01,1.46,3.48,0,.75-.18,1.48-.55,2.18-.37.7-.91,1.23-1.61,1.59l2.85,7.01h-3.76l-2.88-7.08h-.06v7.08h-3.56v-15.55ZM20.19,37.75v3.69c1.58-.03,2.36-.58,2.36-1.64,0-.72-.18-1.24-.55-1.55-.36-.31-.97-.48-1.82-.5Z"/>
+    <path class="stc0" d="M34.02,50.67c-1.9,0-3.34-.72-4.34-2.16-1-1.44-1.49-3.52-1.49-6.24,0-2.51.5-4.46,1.5-5.86,1-1.4,2.39-2.1,4.18-2.1,1.91,0,3.36.7,4.37,2.11,1.01,1.41,1.51,3.41,1.51,6.02s-.5,4.63-1.49,6.07c-.99,1.44-2.41,2.16-4.24,2.16ZM33.89,37.84c-1.29,0-1.93,1.49-1.93,4.48,0,1.93.16,3.21.49,3.85.33.64.8.97,1.42.97.67,0,1.18-.32,1.53-.97.36-.64.54-1.91.54-3.78,0-3.04-.68-4.55-2.05-4.55Z"/>
+    <path class="stc0" d="M66.02,34.74h4.41c1.55,0,2.8.44,3.74,1.32.94.88,1.41,2.03,1.41,3.47,0,1.51-.48,2.7-1.43,3.56-.95.86-2.27,1.29-3.96,1.29h-.61v5.92h-3.56v-15.55ZM69.58,37.73v3.67c.8-.02,1.39-.17,1.77-.45.38-.29.57-.74.57-1.36,0-.67-.18-1.14-.55-1.41-.37-.28-.96-.42-1.79-.44Z"/>
+    <path class="stc0" d="M77.9,33.88h3.41v7.08h.06c.84-1.16,1.81-1.74,2.91-1.74.78,0,1.39.25,1.83.76s.65,1.22.65,2.15v8.15h-3.42v-6.53c0-.42-.08-.75-.25-.98-.17-.24-.4-.36-.7-.36-.71,0-1.07.48-1.07,1.43v6.44h-3.41v-16.41Z"/>
+    <path class="stc0" d="M94.66,50.29v-1.41h-.05c-.42.61-.82,1.05-1.21,1.34-.39.29-.85.43-1.37.43-1.03,0-1.85-.52-2.46-1.56-.61-1.04-.92-2.45-.92-4.24s.31-3.08.93-4.1c.62-1.02,1.44-1.53,2.45-1.53.54,0,1,.13,1.38.4.38.27.77.7,1.18,1.29h.05v-1.34h3.42v10.71h-3.4ZM94.66,44.88c0-1.78-.44-2.67-1.32-2.67s-1.33.89-1.33,2.67.46,2.77,1.38,2.77c.85,0,1.27-.92,1.27-2.77Z"/>
+    <path class="stc0" d="M103.94,39.58v1.79h.05c.82-1.4,1.67-2.1,2.58-2.1.13,0,.32.02.55.07v3.32c-.42-.07-.8-.1-1.15-.1-1.25,0-1.88.8-1.88,2.41v5.32h-3.41v-10.71h3.27Z"/>
+    <path class="stc0" d="M112.37,39.58v1.32c.97-1.13,1.96-1.69,2.96-1.69,1.21,0,1.99.62,2.34,1.85.55-.64,1.06-1.11,1.53-1.41.47-.3,1.03-.44,1.66-.44,1.59,0,2.39,1.1,2.39,3.31v7.78h-3.42v-6.32c0-1.03-.34-1.55-1.01-1.55s-1.04.51-1.04,1.53v6.35h-3.42v-6.51c0-.4-.09-.72-.28-.98-.18-.26-.42-.38-.71-.38-.31,0-.55.12-.74.37-.18.25-.28.59-.28,1.01v6.49h-3.41v-10.71h3.41Z"/>
+  </g>
+  <g>
+    <path class="stc1" d="M50.49,35c.77-1.1,1.43-2.29,1.99-3.56.6,1.29,1.28,2.47,2.04,3.56h-4.03ZM55.11,39.53h3.72c-1.39-1.06-2.63-2.3-3.72-3.72v3.72ZM59.85,44.03c1.05-.71,2.2-1.34,3.43-1.91-1.22-.53-2.36-1.15-3.43-1.86v3.77ZM49.86,39.53v-3.68c-1.07,1.37-2.32,2.6-3.76,3.68h3.76ZM45.12,40.23c-1.05.71-2.2,1.34-3.43,1.9,1.22.53,2.37,1.15,3.43,1.86v-3.77ZM55.11,44.73v3.68c1.07-1.37,2.33-2.6,3.77-3.68h-3.77ZM49.86,44.73h-3.72c1.39,1.06,2.62,2.3,3.72,3.72v-3.72ZM50.45,49.26c.76,1.09,1.43,2.27,2.03,3.56.56-1.27,1.22-2.46,2-3.56h-4.03Z"/>
+    <rect class="stc0" x="50.56" y="40.22" width="3.85" height="3.81"/>
+  </g>
+</svg></a>
+  <a href="index.html" class="nav-back">← 返回官網</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">保養諮詢</div>
+  <h1 class="hero-title">找到最適合您的<br>32 天循環順序</h1>
+  <p class="hero-sub">8 個問題 · 約 2 分鐘<br>依據您的膚況，產出個人化 G1–G8 使用排列</p>
+  <p class="hero-note">適用對象：已購入循環露 G1–G8 全套系列</p>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span class="progress-label">保養配對分析</span>
+    <span class="progress-count" id="progressCount">1 / 8</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill" style="width:12.5%"></div>
+  </div>
+</div>
+
+<!-- QUESTIONS -->
+<div class="questions-wrap" id="questionsWrap">
+
+  <!-- Q1 -->
+  <div class="q-card active" id="q1">
+    <div class="q-num">01</div>
+    <div class="q-title">目前最想改善的肌膚狀況？</div>
+    <div class="q-hint">單選 · 引導核心保養訴求</div>
+    <div class="q-options">
+      <div class="q-opt" onclick="select(this,'q1','bright')"><div class="q-opt-label">A</div><div class="q-opt-text">暗沉、膚色不均、想要亮白感</div></div>
+      <div class="q-opt" onclick="select(this,'q1','hydra')"><div class="q-opt-label">B</div><div class="q-opt-text">乾燥、缺水、緊繃感</div></div>
+      <div class="q-opt" onclick="select(this,'q1','firm')"><div class="q-opt-label">C</div><div class="q-opt-text">細紋、鬆弛、失去彈性</div></div>
+      <div class="q-opt" onclick="select(this,'q1','pore')"><div class="q-opt-label">D</div><div class="q-opt-text">毛孔粗大、油脂分泌旺盛</div></div>
+      <div class="q-opt" onclick="select(this,'q1','sensi')"><div class="q-opt-label">E</div><div class="q-opt-text">敏感、泛紅、屏障脆弱</div></div>
+      <div class="q-opt" onclick="select(this,'q1','all')"><div class="q-opt-label">F</div><div class="q-opt-text">全面維護，無特定困擾</div></div>
+    </div>
+    <div class="q-nav">
+      <div></div>
+      <button class="btn-next" id="next1" onclick="nextQ(2)" disabled>下一題 →</button>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="q2">
+    <div class="q-num">02</div>
+    <div class="q-title">您的年齡層？</div>
+    <div class="q-hint">單選 · 影響 G2 / G3 的強化程度與排序</div>
+    <div class="q-options">
+      <div class="q-opt" onclick="select(this,'q2','18')"><div class="q-opt-label">A</div><div class="q-opt-text">18–25 歲</div></div>
+      <div class="q-opt" onclick="select(this,'q2','26')"><div class="q-opt-label">B</div><div class="q-opt-text">26–35 歲</div></div>
+      <div class="q-opt" onclick="select(this,'q2','36')"><div class="q-opt-label">C</div><div class="q-opt-text">36–45 歲</div></div>
+      <div class="q-opt" onclick="select(this,'q2','46')"><div class="q-opt-label">D</div><div class="q-opt-text">46–55 歲</div></div>
+      <div class="q-opt" onclick="select(this,'q2','56')"><div class="q-opt-label">E</div><div class="q-opt-text">56–65 歲</div></div>
+      <div class="q-opt" onclick="select(this,'q2','65')"><div class="q-opt-label">F</div><div class="q-opt-text">65 歲以上</div></div>
+    </div>
+    <div class="q-nav">
+      <button class="btn-back" onclick="prevQ(1)">← 上一題</button>
+      <button class="btn-next" id="next2" onclick="nextQ(3)" disabled>下一題 →</button>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="q3">
+    <div class="q-num">03</div>
+    <div class="q-title">您的膚質類型？</div>
+    <div class="q-hint">單選 · 影響 G5 / G6 / G8 的配置</div>
+    <div class="q-options">
+      <div class="q-opt" onclick="select(this,'q3','oily')"><div class="q-opt-label">A</div><div class="q-opt-text">油性肌（T 區出油、毛孔明顯）</div></div>
+      <div class="q-opt" onclick="select(this,'q3','dry')"><div class="q-opt-label">B</div><div class="q-opt-text">乾性肌（全臉偏乾、容易脫皮）</div></div>
+      <div class="q-opt" onclick="select(this,'q3','combo')"><div class="q-opt-label">C</div><div class="q-opt-text">混合肌（T 區油、臉頰乾）</div></div>
+      <div class="q-opt" onclick="select(this,'q3','sensi')"><div class="q-opt-label">D</div><div class="q-opt-text">敏感肌（容易泛紅、耐受度低）</div></div>
+      <div class="q-opt" onclick="select(this,'q3','normal')"><div class="q-opt-label">E</div><div class="q-opt-text">中性肌（膚況穩定均衡）</div></div>
+    </div>
+    <div class="q-nav">
+      <button class="btn-back" onclick="prevQ(2)">← 上一題</button>
+      <button class="btn-next" id="next3" onclick="nextQ(4)" disabled>下一題 →</button>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" id="q4">
+    <div class="q-num">04</div>
+    <div class="q-title">目前的保養習慣是？</div>
+    <div class="q-hint">單選 · 評估導入強度</div>
+    <div class="q-options">
+      <div class="q-opt" onclick="select(this,'q4','begin')"><div class="q-opt-label">A</div><div class="q-opt-text">剛開始保養，步驟偏少</div></div>
+      <div class="q-opt" onclick="select(this,'q4','basic')"><div class="q-opt-label">B</div><div class="q-opt-text">有固定習慣，但步驟較簡單</div></div>
+      <div class="q-opt" onclick="select(this,'q4','full')"><div class="q-opt-label">C</div><div class="q-opt-text">保養步驟完整，有使用精華</div></div>
+      <div class="q-opt" onclick="select(this,'q4','pro')"><div class="q-opt-label">D</div><div class="q-opt-text">保養達人，接受度高</div></div>
+    </div>
+    <div class="q-nav">
+      <button class="btn-back" onclick="prevQ(3)">← 上一題</button>
+      <button class="btn-next" id="next4" onclick="nextQ(5)" disabled>下一題 →</button>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" id="q5">
+    <div class="q-num">05</div>
+    <div class="q-title">目前肌膚是否有以下狀況？</div>
+    <div class="q-hint">單選 · 安全確認，影響本輪強度</div>
+    <div class="q-options">
+      <div class="q-opt" onclick="select(this,'q5','burn')"><div class="q-opt-label">A</div><div class="q-opt-text">近期曬傷或換季敏感</div></div>
+      <div class="q-opt" onclick="select(this,'q5','cycle')"><div class="q-opt-label">B</div><div class="q-opt-text">生理期前後，膚況不穩</div></div>
+      <div class="q-opt" onclick="select(this,'q5','stress')"><div class="q-opt-label">C</div><div class="q-opt-text">長期壓力大、睡眠不足</div></div>
+      <div class="q-opt" onclick="select(this,'q5','barrier')"><div class="q-opt-label">D</div><div class="q-opt-text">屏障受損（曾使用刺激性產品）</div></div>
+      <div class="q-opt" onclick="select(this,'q5','none')"><div class="q-opt-label">E</div><div class="q-opt-text">以上皆無，膚況正常</div></div>
+    </div>
+    <div class="q-nav">
+      <button class="btn-back" onclick="prevQ(4)">← 上一題</button>
+      <button class="btn-next" id="next5" onclick="nextQ(6)" disabled>下一題 →</button>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" id="q6">
+    <div class="q-num">06</div>
+    <div class="q-title">這一輪最希望「先感受到」哪種效果？</div>
+    <div class="q-hint">單選 · 微調排列，貼近主觀期待</div>
+    <div class="q-options">
+      <div class="q-opt" onclick="select(this,'q6','hydra')"><div class="q-opt-label">A</div><div class="q-opt-text">第一週就感覺水潤、滋潤度提升</div></div>
+      <div class="q-opt" onclick="select(this,'q6','bright')"><div class="q-opt-label">B</div><div class="q-opt-text">整體膚色感覺亮一點、均勻</div></div>
+      <div class="q-opt" onclick="select(this,'q6','firm')"><div class="q-opt-label">C</div><div class="q-opt-text">臉部輪廓感覺緊一點、彈潤</div></div>
+      <div class="q-opt" onclick="select(this,'q6','calm')"><div class="q-opt-label">D</div><div class="q-opt-text">膚況穩定、不再敏感泛紅</div></div>
+      <div class="q-opt" onclick="select(this,'q6','pore')"><div class="q-opt-label">E</div><div class="q-opt-text">毛孔感覺細緻、清爽不油膩</div></div>
+      <div class="q-opt" onclick="select(this,'q6','all')"><div class="q-opt-label">F</div><div class="q-opt-text">全面均衡，無特別期待</div></div>
+    </div>
+    <div class="q-nav">
+      <button class="btn-back" onclick="prevQ(5)">← 上一題</button>
+      <button class="btn-next" id="next6" onclick="nextQ(7)" disabled>下一題 →</button>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" id="q7">
+    <div class="q-num">07</div>
+    <div class="q-title">偏好每天使用幾個精華步驟？</div>
+    <div class="q-hint">單選 · 影響轉換期是否疊用</div>
+    <div class="q-options">
+      <div class="q-opt" onclick="select(this,'q7','simple')"><div class="q-opt-label">A</div><div class="q-opt-text">越簡單越好，1–2 支就夠</div></div>
+      <div class="q-opt" onclick="select(this,'q7','mid')"><div class="q-opt-label">B</div><div class="q-opt-text">可以 2–3 支，稍微多一點沒問題</div></div>
+      <div class="q-opt" onclick="select(this,'q7','full')"><div class="q-opt-label">C</div><div class="q-opt-text">完整步驟都 OK，3 支以上也可以</div></div>
+    </div>
+    <div class="q-nav">
+      <button class="btn-back" onclick="prevQ(6)">← 上一題</button>
+      <button class="btn-next" id="next7" onclick="nextQ(8)" disabled>下一題 →</button>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" id="q8">
+    <div class="q-num">08</div>
+    <div class="q-title">這是您第幾輪使用循環露？</div>
+    <div class="q-hint">單選 · 影響排列強度與 G2 的位置</div>
+    <div class="q-options">
+      <div class="q-opt" onclick="select(this,'q8','first')"><div class="q-opt-label">A</div><div class="q-opt-text">第一輪，全新開始</div></div>
+      <div class="q-opt" onclick="select(this,'q8','second')"><div class="q-opt-label">B</div><div class="q-opt-text">第二輪</div></div>
+      <div class="q-opt" onclick="select(this,'q8','third')"><div class="q-opt-label">C</div><div class="q-opt-text">第三輪以上</div></div>
+    </div>
+    <div class="q-nav">
+      <button class="btn-back" onclick="prevQ(7)">← 上一題</button>
+      <button class="btn-next" id="next8" onclick="showLoading()" disabled>產出我的排列 ✦</button>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading-wrap" id="loadingWrap">
+    <div class="loading-ring"></div>
+    <div class="loading-text">正在分析您的膚況…</div>
+  </div>
+
+</div><!-- /questions-wrap -->
+
+<!-- RESULT -->
+<div class="result-wrap" id="resultWrap">
+
+  <div class="result-hero">
+    <div class="result-hero-inner">
+      <div class="result-badge">✦ 個人化循環排列</div>
+      <div class="result-greeting">您的專屬保養方案</div>
+      <div class="result-title" id="resultTitle">—</div>
+      <div class="result-sub" id="resultSub">—</div>
+    </div>
+  </div>
+
+  <div class="result-plan-title">32 天使用順序</div>
+
+  <div class="plan-list" id="planList"></div>
+
+  <div class="result-notes" id="resultNotes"></div>
+
+  <div class="result-cta">
+    <div class="result-cta-text">想進一步了解使用方式，或有任何保養問題？<br>加入我們的 LINE 官方帳號，由顧問為您解答。</div>
+    <a href="https://line.me/R/ti/p/@659prhya" target="_blank" rel="noopener" class="btn-line">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.477 2 2 6.145 2 11.243c0 3.066 1.607 5.788 4.123 7.572V22l3.77-2.073A11.3 11.3 0 0012 20.486c5.523 0 10-4.144 10-9.243C22 6.145 17.523 2 12 2z"/></svg>
+      加入 LINE · 繼續諮詢
+    </a>
+    <button class="btn-redo" onclick="resetAll()">↺ 重新作答</button>
+  </div>
+
+</div><!-- /result-wrap -->
+
+<script>
+// ── 狀態 ──
+const ans = {};
+let currentQ = 1;
+
+// ── 系列資料 ──
+const SERIES = {
+  G1:{ name:'細胞外囊泡精華露', en:'Exosome', role:'開路先鋒，提升後續吸收效率' },
+  G2:{ name:'幹細胞能量精華露', en:'Stem Cell', role:'深層活化，賦予肌膚彈潤活力感' },
+  G3:{ name:'胜肽緊緻精華露',   en:'Peptide',  role:'緊緻線條，使用後肌膚感覺飽滿彈潤' },
+  G4:{ name:'PDRN 亮采精華露',  en:'PDRN',     role:'亮采均色，賦予肌膚透亮光澤感' },
+  G5:{ name:'微生態調理精華露', en:'Microbiome',role:'生態平衡，調理膚況使肌膚舒適均衡' },
+  G6:{ name:'黑豆舒緩保養露',   en:'Fermented Black Bean', role:'舒緩修護，強化屏障賦予柔嫩感' },
+  G7:{ name:'深層保濕精華露',   en:'Deep Hydration', role:'深層鎖水，使用後肌膚感覺水潤飽滿' },
+  G8:{ name:'二裂酵母保養露',   en:'Bifida Ferment', role:'鞏固收尾，使用後肌膚感覺柔嫩透亮' },
+};
+
+// ── 排列邏輯 ──
+function buildPlan() {
+  const q1 = ans.q1, q2 = ans.q2, q3 = ans.q3;
+  const q4 = ans.q4, q5 = ans.q5, q6 = ans.q6, q8 = ans.q8;
+
+  // 是否需要舒緩優先
+  const needCalm = (q5 === 'burn' || q5 === 'barrier' || q3 === 'sensi' || q1 === 'sensi');
+  // 是否第一輪
+  const isFirst  = q8 === 'first';
+  // 是否進階輪
+  const isAdv    = q8 === 'third';
+  // 年齡層
+  const ageHigh  = (q2 === '56' || q2 === '65');
+  const ageMid   = (q2 === '36' || q2 === '46');
+  // 主訴求
+  const wantBright = (q1 === 'bright' || q6 === 'bright');
+  const wantFirm   = (q1 === 'firm'   || q6 === 'firm');
+  const wantHydra  = (q1 === 'hydra'  || q6 === 'hydra' || q3 === 'dry');
+  const wantPore   = (q1 === 'pore'   || q6 === 'pore'  || q3 === 'oily');
+  const wantCalm   = (q1 === 'sensi'  || q6 === 'calm');
+
+  let order = [];
+
+  // ── 舒緩優先模式 ──
+  if (needCalm) {
+    order = ['G6','G1','G7','G5','G8','G3','G4','G2'];
+  }
+  // ── 第一輪新手導入 ──
+  else if (isFirst) {
+    if (wantPore)   order = ['G1','G8','G5','G7','G3','G6','G4','G2'];
+    else if (wantBright) order = ['G1','G4','G7','G5','G8','G3','G6','G2'];
+    else if (wantHydra)  order = ['G7','G1','G5','G8','G3','G6','G4','G2'];
+    else                 order = ['G1','G6','G7','G5','G8','G3','G4','G2'];
+  }
+  // ── 進階輪（第三輪以上）高齡 ──
+  else if (isAdv && (ageHigh || ageMid)) {
+    if (wantBright) order = ['G1','G4','G2','G3','G8','G5','G7','G6'];
+    else if (wantFirm)  order = ['G1','G2','G3','G4','G5','G7','G8','G6'];
+    else                order = ['G2','G1','G3','G4','G5','G7','G8','G6'];
+  }
+  // ── 標準強化輪 ──
+  else {
+    if (wantBright && wantFirm)   order = ['G1','G4','G3','G2','G5','G7','G8','G6'];
+    else if (wantBright)          order = ['G1','G4','G2','G5','G3','G7','G8','G6'];
+    else if (wantFirm)            order = ['G1','G3','G2','G4','G5','G7','G8','G6'];
+    else if (wantHydra)           order = ['G7','G1','G5','G4','G3','G8','G6','G2'];
+    else if (wantPore)            order = ['G1','G8','G5','G4','G3','G7','G6','G2'];
+    else if (wantCalm)            order = ['G6','G1','G5','G7','G8','G3','G4','G2'];
+    else if (ageHigh)             order = ['G2','G1','G3','G4','G5','G7','G8','G6'];
+    else if (ageMid)              order = ['G1','G3','G2','G4','G5','G7','G8','G6'];
+    else                          order = ['G1','G2','G3','G4','G5','G6','G7','G8'];
+  }
+
+  return order;
+}
+
+// ── 標題與說明 ──
+function buildTitle() {
+  const q1 = ans.q1, q5 = ans.q5, q3 = ans.q3, q8 = ans.q8;
+  const needCalm = (q5 === 'burn' || q5 === 'barrier' || q3 === 'sensi' || q1 === 'sensi');
+  const isFirst = q8 === 'first';
+
+  if (needCalm)   return ['舒緩優先修護方案', '本輪以穩定屏障為核心，讓肌膚在舒適狀態下完成 32 天循環。下一輪可依需求進行強化排列。'];
+  if (isFirst)    return ['新手導入循環方案', '第一輪以建立肌膚耐受度為主，G2 幹細胞置後段，讓肌膚從容適應 8 大系列的完整護理。'];
+  if (ans.q1 === 'bright') return ['亮采均色強化方案', 'G4 PDRN 提前至核心週期，搭配 G2 幹細胞同步活化，全輪以均勻亮白為主軸推進。'];
+  if (ans.q1 === 'firm')   return ['緊緻抗老強化方案', 'G3 胜肽與 G2 幹細胞雙重提前，搭配完整 8 系列循環，強化彈潤緊緻感。'];
+  if (ans.q1 === 'pore')   return ['毛孔調理方案', 'G8 二裂酵母與 G5 微生態同步強化，調理皮脂平衡，讓肌膚由內而外感覺細緻清爽。'];
+  if (ans.q1 === 'hydra')  return ['深層保濕方案', 'G7 深層保濕提前至首週，搭配 G5 微生態平衡膚況，讓肌膚全輪維持水潤飽滿感。'];
+  return ['個人化全面保養方案', '依據您的膚況與訴求，全面最佳化 G1–G8 的使用順序，32 天完整循環呵護。'];
+}
+
+// ── 注意事項 ──
+function buildNotes() {
+  const notes = ['每天早晚各使用一次，取約 3–5 滴均勻輕拍全臉。', '每 4 天換下一支，依照上方順序依序使用。', '32 天結束後，可重新從第一支開始新一輪循環。'];
+  const q5 = ans.q5, q3 = ans.q3, q7 = ans.q7;
+  if (q5 === 'burn' || q5 === 'barrier') notes.push('本輪請避免疊加其他高濃度活性成分，讓肌膚專注修護。');
+  if (q3 === 'sensi') notes.push('敏感肌建議從少量開始，觀察 2–3 天無不適後再正常用量。');
+  if (q7 === 'full')  notes.push('轉換期（第 4 天）可同時使用前後兩支各少量，加速成效銜接。');
+  if (ans.q8 === 'first') notes.push('第一輪建議放慢節奏，讓每支系列有完整 4 天發揮空間，不需要急於看到強烈效果。');
+  return notes;
+}
+
+// ── 顯示結果 ──
+function showResult() {
+  const order = buildPlan();
+  const [title, sub] = buildTitle();
+  const notes = buildNotes();
+  const days = [['Day 1–4','Week 1'],['Day 5–8','Week 2'],['Day 9–12','Week 3'],['Day 13–16','Week 4'],['Day 17–20','Week 5'],['Day 21–24','Week 6'],['Day 25–28','Week 7'],['Day 29–32','Week 8']];
+
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultSub').textContent   = sub;
+
+  const list = document.getElementById('planList');
+  list.innerHTML = '';
+  order.forEach((g, i) => {
+    const s = SERIES[g];
+    list.innerHTML += `
+      <div class="plan-item">
+        <div class="plan-week">
+          <div class="plan-week-num">${i+1}</div>
+          <div class="plan-week-days">${days[i][0]}</div>
+        </div>
+        <div class="plan-body">
+          <div class="plan-series">${g} · ${s.en.toUpperCase()}</div>
+          <div class="plan-name">${s.name}</div>
+          <div class="plan-role">${s.role}</div>
+        </div>
+      </div>`;
+  });
+
+  const notesEl = document.getElementById('resultNotes');
+  notesEl.innerHTML = `<div class="result-notes-title">使用提醒</div>` +
+    notes.map(n => `<div class="note-item"><div class="note-dot"></div><div>${n}</div></div>`).join('');
+
+  document.getElementById('questionsWrap').style.display = 'none';
+  document.getElementById('progressFill').parentElement.parentElement.style.display = 'none';
+  document.getElementById('resultWrap').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── 互動函式 ──
+function select(el, key, val) {
+  el.closest('.q-options').querySelectorAll('.q-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  ans[key] = val;
+  const num = key.replace('q','');
+  const btn = document.getElementById('next' + num);
+  if (btn) btn.disabled = false;
+}
+
+function nextQ(n) {
+  document.getElementById('q'+(n-1)).classList.remove('active');
+  document.getElementById('q'+n).classList.add('active');
+  currentQ = n;
+  updateProgress(n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevQ(n) {
+  document.getElementById('q'+(n+1)).classList.remove('active');
+  document.getElementById('q'+n).classList.add('active');
+  currentQ = n;
+  updateProgress(n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress(n) {
+  document.getElementById('progressFill').style.width = (n / 8 * 100) + '%';
+  document.getElementById('progressCount').textContent = n + ' / 8';
+}
+
+function showLoading() {
+  document.querySelectorAll('.q-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('loadingWrap').style.display = 'block';
+  updateProgress(8);
+  setTimeout(showResult, 1400);
+}
+
+function resetAll() {
+  Object.keys(ans).forEach(k => delete ans[k]);
+  document.querySelectorAll('.q-opt').forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('.q-card').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.btn-next').forEach(b => b.disabled = true);
+  document.getElementById('loadingWrap').style.display = 'none';
+  document.getElementById('q1').classList.add('active');
+  document.getElementById('resultWrap').style.display = 'none';
+  document.getElementById('questionsWrap').style.display = 'block';
+  document.getElementById('progressFill').parentElement.parentElement.style.display = 'block';
+  updateProgress(1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
